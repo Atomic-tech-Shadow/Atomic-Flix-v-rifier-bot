@@ -18,6 +18,27 @@
     },
     "api/verify-subscription.js": {
       "maxDuration": 15
+    },
+    "api/anime-promotion.js": {
+      "maxDuration": 10
+    },
+    "api/growth-features.js": {
+      "maxDuration": 10
+    },
+    "api/send-message.js": {
+      "maxDuration": 10
+    },
+    "api/webhook-handler.js": {
+      "maxDuration": 10
+    },
+    "api/set-commands.js": {
+      "maxDuration": 10
+    },
+    "api/get-user-id.js": {
+      "maxDuration": 10
+    },
+    "api/bot-info-simple.js": {
+      "maxDuration": 10
     }
   }
 }
