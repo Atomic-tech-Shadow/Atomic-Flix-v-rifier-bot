@@ -11,7 +11,7 @@ Ce guide explique comment intégrer le backend Telegram ATOMIC FLIX dans votre a
 ```javascript
 // config/api.js
 const API_CONFIG = {
-  BASE_URL: 'https://votre-backend-vercel.vercel.app',
+  BASE_URL: 'https://atomic-flix-verifier-bot.vercel.app',
   ENDPOINTS: {
     HEALTH: '/api/health',
     VERIFY_SUBSCRIPTION: '/api/verify-subscription',

@@ -21,8 +21,8 @@ Créez un fichier `src/config/api.js` :
 
 ```javascript
 const API_CONFIG = {
-  // Remplacez par l'URL de votre backend déployé
-  BASE_URL: 'https://votre-backend-atomic-flix.vercel.app',
+  // URL du backend ATOMIC FLIX déployé sur Vercel
+  BASE_URL: 'https://atomic-flix-verifier-bot.vercel.app',
   
   ENDPOINTS: {
     HEALTH: '/api/health',

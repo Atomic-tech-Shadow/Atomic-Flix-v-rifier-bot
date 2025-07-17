@@ -2,7 +2,9 @@
 
 Backend Node.js déployé sur Vercel pour vérifier les abonnements Telegram du canal @Atomic_flix_officiel pour l'application mobile ATOMIC FLIX.
 
-## 🚀 Déploiement
+## 🚀 Backend Déployé
+
+**URL de Production :** https://atomic-flix-verifier-bot.vercel.app/
 
 ### Configuration
 
@@ -10,19 +12,6 @@ Backend Node.js déployé sur Vercel pour vérifier les abonnements Telegram du 
 - `CHANNEL_ID` : @Atomic_flix_officiel (configuré par défaut)
 
 **Note :** Le token du bot est maintenant intégré directement dans `lib/telegramBot.js`, aucune variable d'environnement n'est requise.
-
-### Commandes de déploiement
-
-```bash
-# Installation locale
-npm install
-
-# Test local
-npm start
-
-# Déploiement sur Vercel
-vercel --prod
-```
 
 ## 📡 Endpoints API
 
