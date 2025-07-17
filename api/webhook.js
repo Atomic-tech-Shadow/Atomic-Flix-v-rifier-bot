@@ -32,6 +32,29 @@ module.exports = async (req, res) => {
     
     console.log('Processing webhook update:', JSON.stringify(update, null, 2));
     
+    // Handle new chat members (when someone joins the channel)
+    if (update.message && update.message.new_chat_members) {
+      const newMembers = update.message.new_chat_members;
+      const chatId = update.message.chat.id;
+      
+      for (const member of newMembers) {
+        if (!member.is_bot) {
+          await sendWelcomeMessage(bot, member);
+        }
+      }
+    }
+    
+    // Handle my_chat_member updates (when bot status changes in channel)
+    if (update.my_chat_member) {
+      const newMember = update.my_chat_member.new_chat_member;
+      const chat = update.my_chat_member.chat;
+      
+      if (chat.username === 'Atomic_flix_officiel' && newMember.status === 'member') {
+        const user = update.my_chat_member.from;
+        await sendWelcomeMessage(bot, user);
+      }
+    }
+    
     // Handle text messages
     if (update.message && update.message.text) {
       const chatId = update.message.chat.id;
@@ -430,6 +453,63 @@ module.exports = async (req, res) => {
             }
           );
         }
+      } else if (callbackData === 'welcome_anime') {
+        await bot.editMessageText(
+          `🍿 Bienvenue dans l'univers Anime ATOMIC FLIX !\n\n` +
+          `📺 **Nos animes populaires :**\n` +
+          `• Attack on Titan - Saison finale\n` +
+          `• Demon Slayer - Épisodes récents\n` +
+          `• One Piece - Mise à jour quotidienne\n` +
+          `• Jujutsu Kaisen - Nouvelle saison\n` +
+          `• Naruto/Boruto - Collection complète\n\n` +
+          `🎌 **Genres disponibles :**\n` +
+          `• Shonen • Seinen • Josei • Kodomomuke\n` +
+          `• Romance • Action • Fantastique • Horreur\n\n` +
+          `Utilisez /anime pour plus de détails !`,
+          {
+            chat_id: chatId,
+            message_id: update.callback_query.message.message_id,
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '🎬 Accéder aux animes',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ]
+              ]
+            }
+          }
+        );
+      } else if (callbackData === 'welcome_movies') {
+        await bot.editMessageText(
+          `🎭 Bienvenue dans notre cinéma premium !\n\n` +
+          `🎬 **Nouveautés cette semaine :**\n` +
+          `• Films d'action Hollywood\n` +
+          `• Drames coréens trending\n` +
+          `• Comédies françaises\n` +
+          `• Documentaires exclusifs\n` +
+          `• Séries Netflix/Prime\n\n` +
+          `🌟 **Qualité premium :**\n` +
+          `• 4K Ultra HD disponible\n` +
+          `• Sous-titres multiples\n` +
+          `• Téléchargement illimité\n\n` +
+          `Utilisez /movies pour explorer !`,
+          {
+            chat_id: chatId,
+            message_id: update.callback_query.message.message_id,
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '🎬 Voir le catalogue',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ]
+              ]
+            }
+          }
+        );
       } else if (callbackData === 'start') {
         await bot.editMessageText(
           `🎬 Bienvenue sur ATOMIC FLIX !\n\n` +
@@ -479,3 +559,70 @@ module.exports = async (req, res) => {
     });
   }
 };
+
+// Fonction pour envoyer un message de bienvenue aux nouveaux membres
+async function sendWelcomeMessage(bot, user) {
+  try {
+    const userId = user.id;
+    const firstName = user.first_name || 'Nouveau membre';
+    const username = user.username ? `@${user.username}` : firstName;
+    
+    console.log(`Sending welcome message to new member: ${username} (${userId})`);
+    
+    // Message de bienvenue personnalisé
+    const welcomeMessage = 
+      `🎉 Bienvenue sur ATOMIC FLIX, ${firstName} !\n\n` +
+      `🎬 Félicitations ! Vous venez de rejoindre la plus grande communauté de streaming francophone.\n\n` +
+      `✨ **Votre accès premium inclut :**\n` +
+      `• 🍿 Animes en exclusivité\n` +
+      `• 🎭 Films et séries récents\n` +
+      `• 📺 Contenus 4K sans publicité\n` +
+      `• 💬 Communauté active de +1000 membres\n\n` +
+      `🚀 **Pour commencer :**\n` +
+      `• Explorez notre catalogue avec /anime\n` +
+      `• Découvrez les nouveautés avec /movies\n` +
+      `• Vérifiez votre statut avec /status\n\n` +
+      `🎁 **Bonus de bienvenue :**\n` +
+      `Accès immédiat à tous nos contenus premium !\n\n` +
+      `Merci de nous faire confiance ! 🙏`;
+    
+    await bot.sendMessage(userId, welcomeMessage, {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: '🍿 Découvrir les animes',
+              callback_data: 'welcome_anime'
+            },
+            {
+              text: '🎭 Voir les films',
+              callback_data: 'welcome_movies'
+            }
+          ],
+          [
+            {
+              text: '📊 Mon statut premium',
+              callback_data: 'verify_subscription'
+            }
+          ],
+          [
+            {
+              text: '🎬 Retour au canal',
+              url: 'https://t.me/Atomic_flix_officiel'
+            }
+          ]
+        ]
+      }
+    });
+    
+    console.log(`Welcome message sent successfully to ${username}`);
+    
+  } catch (error) {
+    console.error('Error sending welcome message:', error);
+    
+    // Si l'envoi privé échoue, ne pas faire d'erreur
+    if (error.code === 403) {
+      console.log(`User ${user.id} has blocked private messages`);
+    }
+  }
+}
