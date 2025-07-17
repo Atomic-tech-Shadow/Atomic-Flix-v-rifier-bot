@@ -12,24 +12,53 @@ app.use(express.urlencoded({ extended: true }));
 const healthRoute = require('./api/health');
 const verifySubscriptionRoute = require('./api/verify-subscription');
 const getUserIdRoute = require('./api/get-user-id');
+const botInfoRoute = require('./api/bot-info-simple');
+const sendMessageRoute = require('./api/send-message');
+const webhookHandlerRoute = require('./api/webhook-handler');
+const setCommandsRoute = require('./api/set-commands');
 
 // API routes
 app.get('/api/health', healthRoute);
 app.post('/api/verify-subscription', verifySubscriptionRoute);
 app.get('/api/get-user-id', getUserIdRoute);
+app.get('/api/bot-info', botInfoRoute);
+app.post('/api/send-message', sendMessageRoute);
+app.post('/api/webhook', webhookHandlerRoute);
+app.post('/api/set-commands', setCommandsRoute);
 
 // Root route
 app.get('/', (req, res) => {
   res.json({
     message: 'ATOMIC FLIX Telegram Backend API',
-    version: '1.0.0',
+    version: '2.0.0',
+    bot: {
+      name: 'Atomic_flix_verifier_bot',
+      channel: '@Atomic_flix_officiel'
+    },
     endpoints: {
       health: 'GET /api/health',
-      verifySubscription: 'POST /api/verify-subscription'
+      verifySubscription: 'POST /api/verify-subscription',
+      getUserId: 'GET /api/get-user-id',
+      botInfo: 'GET /api/bot-info',
+      sendMessage: 'POST /api/send-message',
+      webhook: 'POST /api/webhook',
+      setCommands: 'POST /api/set-commands'
+    },
+    features: {
+      subscriptionVerification: 'Verify user subscription to Telegram channel',
+      inlineKeyboards: 'Interactive buttons for better user experience',
+      webhookSupport: 'Real-time message handling',
+      commandManagement: 'Bot command configuration',
+      messageDelivery: 'Send messages to users'
     },
     documentation: {
       health: 'Check bot status and configuration',
-      verifySubscription: 'Verify user subscription to @Atomic_flix_officiel channel'
+      verifySubscription: 'Verify user subscription to @Atomic_flix_officiel channel',
+      getUserId: 'Get user ID from recent bot interactions',
+      botInfo: 'Get detailed bot information including commands and webhook status',
+      sendMessage: 'Send messages to users with optional inline keyboards',
+      webhook: 'Handle incoming webhook updates from Telegram',
+      setCommands: 'Configure bot commands in Telegram'
     }
   });
 });

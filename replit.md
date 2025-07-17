@@ -20,6 +20,16 @@ This is a Node.js backend service deployed on Vercel that verifies Telegram chan
 - ✅ Added local development server (server.js) for testing purposes
 - ✅ Simplified deployment by removing environment variable requirements
 
+### Advanced Features Implementation (Based on BotFather Documentation)
+- ✅ **Inline Keyboards**: Interactive buttons for subscription verification
+- ✅ **Bot Commands**: `/start`, `/verify`, `/help` with auto-configuration
+- ✅ **Message Delivery**: Send messages with optional inline keyboards
+- ✅ **Webhook Handler**: Real-time message processing and command handling
+- ✅ **Bot Info API**: Detailed bot information and capabilities
+- ✅ **User ID Resolution**: Extract user IDs from bot interactions
+- ✅ **Command Management**: Dynamic bot command configuration
+- ✅ **Enhanced Error Handling**: Covers all Telegram API edge cases
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -50,6 +60,31 @@ Preferred communication style: Simple, everyday language.
    - POST endpoint to check user subscription status
    - Validates user membership in Telegram channel
    - Returns subscription status and user information
+
+3. **Bot Information** (`/api/bot-info-simple.js`)
+   - GET endpoint for detailed bot information
+   - Returns commands, features, and capabilities
+   - Used for bot management and debugging
+
+4. **Message Delivery** (`/api/send-message.js`)
+   - POST endpoint to send messages to users
+   - Supports inline keyboards and interactive buttons
+   - Handles delivery errors and user blocking
+
+5. **Command Management** (`/api/set-commands.js`)
+   - POST endpoint to configure bot commands
+   - Sets up `/start`, `/verify`, and `/help` commands
+   - Integrates with Telegram's command interface
+
+6. **Webhook Handler** (`/api/webhook-handler.js`)
+   - POST endpoint for real-time message processing
+   - Handles commands and inline button interactions
+   - Provides automatic responses and subscription checks
+
+7. **User ID Resolution** (`/api/get-user-id.js`)
+   - GET endpoint to extract user IDs from bot interactions
+   - Useful for testing and user management
+   - Returns recent user activity and messages
 
 ### Core Library
 - **Telegram Bot Handler** (`/lib/telegramBot.js`)
