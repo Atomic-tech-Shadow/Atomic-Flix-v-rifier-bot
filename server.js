@@ -78,6 +78,12 @@ app.post('/api/growth-features', async (req, res) => {
   await growthFeaturesHandler(req, res);
 });
 
+// Route pour la promotion anime
+app.post('/api/anime-promotion', async (req, res) => {
+  const animePromotionHandler = require('./api/anime-promotion.js');
+  await animePromotionHandler(req, res);
+});
+
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 ATOMIC FLIX Telegram Backend running on port ${PORT}`);
