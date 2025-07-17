@@ -81,16 +81,23 @@ async function sendWelcomeMessage(bot, user) {
       `• 💬 Communauté otaku passionnée\n\n` +
       `Bonne découverte ! 🙏✨`;
     
-    // ENVOYER LE MESSAGE AVEC IMAGE DANS LE CANAL PUBLIC
+    // ENVOYER LE MESSAGE AVEC IMAGE PERSONNALISÉE DANS LE CANAL PUBLIC
     const channelId = '@Atomic_flix_officiel';
-    const fs = require('fs');
-    const path = require('path');
+    const { generateWelcomeSVG } = require('../lib/svgImageGenerator');
     
-    // Envoyer l'image d'accueil en premier
-    const imagePath = path.join(process.cwd(), 'assets', 'welcome-image.svg');
     try {
-      if (fs.existsSync(imagePath)) {
-        await bot.sendPhoto(channelId, imagePath, {
+      // Générer l'image SVG personnalisée avec la photo de profil de l'utilisateur
+      console.log(`Generating personalized welcome SVG for ${username}...`);
+      const svgContent = await generateWelcomeSVG(user, bot);
+      
+      if (svgContent) {
+        // Sauvegarder temporairement le SVG
+        const fs = require('fs');
+        const tempSvgPath = `temp-welcome-${user.id}.svg`;
+        fs.writeFileSync(tempSvgPath, svgContent);
+        
+        // Envoyer l'image personnalisée avec le message
+        await bot.sendDocument(channelId, tempSvgPath, {
           caption: welcomeMessage,
           reply_markup: {
             inline_keyboard: [
@@ -107,8 +114,12 @@ async function sendWelcomeMessage(bot, user) {
             ]
           }
         });
+        
+        // Nettoyer le fichier temporaire
+        fs.unlinkSync(tempSvgPath);
+        console.log(`Personalized welcome SVG sent successfully for ${username}`);
       } else {
-        // Fallback : envoyer seulement le message texte si l'image n'existe pas
+        // Fallback : envoyer seulement le message texte si la génération d'image échoue
         await bot.sendMessage(channelId, welcomeMessage, {
           reply_markup: {
             inline_keyboard: [
@@ -125,9 +136,10 @@ async function sendWelcomeMessage(bot, user) {
             ]
           }
         });
+        console.log(`Fallback: Text-only welcome message sent for ${username}`);
       }
     } catch (imageError) {
-      console.log('Could not send image, sending text only:', imageError.message);
+      console.log('Error with personalized image, sending text only:', imageError.message);
       // Fallback : envoyer seulement le message texte
       await bot.sendMessage(channelId, welcomeMessage, {
         reply_markup: {

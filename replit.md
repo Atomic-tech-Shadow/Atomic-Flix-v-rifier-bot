@@ -8,12 +8,14 @@ This is a Node.js backend service deployed on Vercel that verifies Telegram chan
 
 ## Recent Changes
 
-### July 17, 2025 - Message d'accueil personnalisé
+### July 17, 2025 - Message d'accueil personnalisé avec image
+- ✅ **IMAGE PERSONNALISÉE: Le bot génère maintenant une image SVG style Canva avec la photo de profil de l'utilisateur**
 - ✅ **MESSAGE D'ACCUEIL AUTOMATIQUE: Le bot publie maintenant un message de bienvenue PUBLIC dans le canal @Atomic_flix_officiel pour chaque nouvel abonné**
-- ✅ **PERSONNALISATION: Le message mentionne le nom d'utilisateur/pseudo du nouvel abonné**
+- ✅ **PERSONNALISATION AVANCÉE: L'image contient le nom d'utilisateur, date d'inscription, et photo de profil Telegram**
+- ✅ **DESIGN PROFESSIONNEL: Image style Canva avec dégradés anime, icons fonctionnalités, éléments kawaii**
 - ✅ **CORRECTION SERVEUR: Résolu l'erreur "Cannot find module './api/get-user-id'" qui empêchait le démarrage**
-- ✅ **COHÉRENCE: Mise à jour des messages dans webhook.js et channel-events.js**
-- ✅ **MESSAGE TYPE: "ATOMIC FLIX vous souhaite la bienvenue @nom et vous remercie d'utiliser nos services"**
+- ✅ **SYSTÈME FALLBACK: Si la génération d'image échoue, envoi du message texte optimisé**
+- ✅ **MESSAGE OPTIMISÉ: "ATOMIC FLIX vous souhaite la bienvenue @nom ! Merci de rejoindre notre communauté anime..."**
 - ✅ Serveur redémarré avec succès - fonctionnel sur port 5000
 
 ### July 17, 2025 - Final Update
