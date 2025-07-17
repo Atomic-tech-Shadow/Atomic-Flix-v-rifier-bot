@@ -117,6 +117,13 @@ module.exports = async (req, res) => {
           `Commandes disponibles :\n` +
           `• /start - Démarrer le bot\n` +
           `• /verify - Vérifier votre abonnement\n` +
+          `• /anime - Découvrir les nouveaux animes\n` +
+          `• /movies - Films et séries disponibles\n` +
+          `• /channel - Rejoindre le canal officiel\n` +
+          `• /status - Statut de votre abonnement\n` +
+          `• /about - À propos d'ATOMIC FLIX\n` +
+          `• /support - Support et assistance\n` +
+          `• /premium - Avantages premium\n` +
           `• /help - Afficher cette aide\n\n` +
           `Pour accéder aux contenus, vous devez être abonné au canal @Atomic_flix_officiel.`,
           {
@@ -125,6 +132,215 @@ module.exports = async (req, res) => {
                 [
                   {
                     text: '📱 Rejoindre le canal',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ]
+              ]
+            }
+          }
+        );
+      } else if (text.startsWith('/anime')) {
+        await bot.sendMessage(chatId, 
+          `🍿 Nouveaux Animes ATOMIC FLIX\n\n` +
+          `📺 Derniers épisodes :\n` +
+          `• Attack on Titan - Final Season\n` +
+          `• Demon Slayer - Saison 4\n` +
+          `• One Piece - Épisodes récents\n` +
+          `• Jujutsu Kaisen - Nouvelle saison\n` +
+          `• Naruto - Collection complète\n\n` +
+          `Rejoignez le canal pour accéder à tous les contenus !`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '🎬 Accéder aux animes',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ],
+                [
+                  {
+                    text: '✅ Vérifier mon abonnement',
+                    callback_data: 'verify_subscription'
+                  }
+                ]
+              ]
+            }
+          }
+        );
+      } else if (text.startsWith('/movies')) {
+        await bot.sendMessage(chatId, 
+          `🎭 Films et Séries ATOMIC FLIX\n\n` +
+          `🎬 Nouveautés :\n` +
+          `• Films d'action récents\n` +
+          `• Séries Netflix populaires\n` +
+          `• Drames coréens tendance\n` +
+          `• Comédies françaises\n` +
+          `• Documentaires exclusifs\n\n` +
+          `Accédez à notre catalogue complet !`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '🎬 Voir le catalogue',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ]
+              ]
+            }
+          }
+        );
+      } else if (text.startsWith('/channel')) {
+        await bot.sendMessage(chatId, 
+          `📱 Canal Officiel ATOMIC FLIX\n\n` +
+          `Rejoignez @Atomic_flix_officiel pour :\n` +
+          `• 🎬 Contenus exclusifs\n` +
+          `• 📺 Nouveautés en avant-première\n` +
+          `• 🍿 Recommandations personnalisées\n` +
+          `• 💬 Communauté active\n` +
+          `• 🎁 Concours et cadeaux\n\n` +
+          `Plus de 1000 membres nous font confiance !`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '📱 Rejoindre maintenant',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ]
+              ]
+            }
+          }
+        );
+      } else if (text.startsWith('/status')) {
+        const { verifySubscription } = require('../lib/telegramBot');
+        const result = await verifySubscription(userId.toString());
+        
+        if (result.isSubscribed) {
+          await bot.sendMessage(chatId, 
+            `📊 Statut de votre abonnement\n\n` +
+            `✅ **ABONNÉ** au canal @Atomic_flix_officiel\n` +
+            `🎬 Accès complet aux contenus\n` +
+            `📱 Membre vérifié\n` +
+            `🔗 Statut : ${result.status}\n\n` +
+            `Profitez de tous nos contenus exclusifs !`,
+            {
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    {
+                      text: '🎬 Accéder au canal',
+                      url: 'https://t.me/Atomic_flix_officiel'
+                    }
+                  ]
+                ]
+              }
+            }
+          );
+        } else {
+          await bot.sendMessage(chatId, 
+            `📊 Statut de votre abonnement\n\n` +
+            `❌ **NON ABONNÉ** au canal @Atomic_flix_officiel\n` +
+            `🚫 Accès limité aux contenus\n` +
+            `📱 Membre non vérifié\n` +
+            `🔗 Statut : ${result.status}\n\n` +
+            `Abonnez-vous pour accéder à tous les contenus !`,
+            {
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    {
+                      text: '📱 S\'abonner maintenant',
+                      url: 'https://t.me/Atomic_flix_officiel'
+                    }
+                  ]
+                ]
+              }
+            }
+          );
+        }
+      } else if (text.startsWith('/about')) {
+        await bot.sendMessage(chatId, 
+          `📖 À propos d'ATOMIC FLIX\n\n` +
+          `🎬 **Votre plateforme de streaming premium**\n\n` +
+          `✨ **Nos services :**\n` +
+          `• Animes en haute qualité\n` +
+          `• Films et séries récents\n` +
+          `• Contenus exclusifs\n` +
+          `• Communauté active\n\n` +
+          `🚀 **Pourquoi nous choisir :**\n` +
+          `• Catalogue mis à jour quotidiennement\n` +
+          `• Support technique 24/7\n` +
+          `• Interface moderne et intuitive\n` +
+          `• Accès illimité aux contenus\n\n` +
+          `Rejoignez plus de 1000 membres satisfaits !`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '📱 Rejoindre la communauté',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ]
+              ]
+            }
+          }
+        );
+      } else if (text.startsWith('/support')) {
+        await bot.sendMessage(chatId, 
+          `🆘 Support ATOMIC FLIX\n\n` +
+          `Besoin d'aide ? Nous sommes là pour vous !\n\n` +
+          `💬 **Contactez-nous :**\n` +
+          `• Canal officiel : @Atomic_flix_officiel\n` +
+          `• Support technique disponible 24/7\n` +
+          `• Réponse rapide garantie\n\n` +
+          `❓ **Problèmes courants :**\n` +
+          `• Vérification d'abonnement\n` +
+          `• Accès aux contenus\n` +
+          `• Problèmes techniques\n` +
+          `• Suggestions d'amélioration\n\n` +
+          `Nous répondons à tous les messages !`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '💬 Contacter le support',
+                    url: 'https://t.me/Atomic_flix_officiel'
+                  }
+                ]
+              ]
+            }
+          }
+        );
+      } else if (text.startsWith('/premium')) {
+        await bot.sendMessage(chatId, 
+          `💎 Avantages Premium ATOMIC FLIX\n\n` +
+          `🎯 **Votre accès premium inclut :**\n\n` +
+          `🎬 **Contenus exclusifs :**\n` +
+          `• Films en avant-première\n` +
+          `• Séries dès leur sortie\n` +
+          `• Animes sous-titrés français\n` +
+          `• Documentaires rares\n\n` +
+          `⚡ **Fonctionnalités premium :**\n` +
+          `• Téléchargement illimité\n` +
+          `• Qualité 4K disponible\n` +
+          `• Aucune publicité\n` +
+          `• Support prioritaire\n\n` +
+          `💬 **Communauté VIP :**\n` +
+          `• Accès aux discussions privées\n` +
+          `• Votes pour les prochains contenus\n` +
+          `• Concours exclusifs\n\n` +
+          `Rejoignez dès maintenant !`,
+          {
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: '💎 Accéder au premium',
                     url: 'https://t.me/Atomic_flix_officiel'
                   }
                 ]
