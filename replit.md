@@ -4,7 +4,7 @@
 
 This is a Node.js backend service deployed on Vercel that verifies Telegram channel subscriptions for the ATOMIC FLIX mobile application. The service uses the Telegram Bot API to check if users are subscribed to the @Atomic_flix_officiel channel.
 
-**Status: ✅ COMPLETED - Backend fully functional and ready for deployment**
+**Status: ⚠️ DEPLOYMENT ISSUE - Backend functional but Vercel API endpoints not accessible**
 
 ## Recent Changes
 
