@@ -569,24 +569,71 @@ async function sendWelcomeMessage(bot, user) {
       `• 💬 Communauté otaku passionnée\n\n` +
       `Bonne découverte ! 🙏✨`;
     
-    // PUBLIER LE MESSAGE DANS LE CANAL PUBLIC
+    // PUBLIER LE MESSAGE AVEC IMAGE DANS LE CANAL PUBLIC
     const channelId = '@Atomic_flix_officiel';
-    await bot.sendMessage(channelId, welcomeMessage, {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: '🍿 Explorer le catalogue',
-              callback_data: 'welcome_anime'
-            },
-            {
-              text: '🤖 Parler au bot',
-              url: 'https://t.me/Atomic_flix_verifier_bot'
-            }
-          ]
-        ]
+    const fs = require('fs');
+    const path = require('path');
+    
+    // Envoyer l'image d'accueil en premier
+    const imagePath = path.join(process.cwd(), 'assets', 'welcome-image.svg');
+    try {
+      if (fs.existsSync(imagePath)) {
+        await bot.sendPhoto(channelId, imagePath, {
+          caption: welcomeMessage,
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: '🍿 Explorer le catalogue',
+                  callback_data: 'welcome_anime'
+                },
+                {
+                  text: '🤖 Parler au bot',
+                  url: 'https://t.me/Atomic_flix_verifier_bot'
+                }
+              ]
+            ]
+          }
+        });
+      } else {
+        // Fallback : envoyer seulement le message texte si l'image n'existe pas
+        await bot.sendMessage(channelId, welcomeMessage, {
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: '🍿 Explorer le catalogue',
+                  callback_data: 'welcome_anime'
+                },
+                {
+                  text: '🤖 Parler au bot',
+                  url: 'https://t.me/Atomic_flix_verifier_bot'
+                }
+              ]
+            ]
+          }
+        });
       }
-    });
+    } catch (imageError) {
+      console.log('Could not send image, sending text only:', imageError.message);
+      // Fallback : envoyer seulement le message texte
+      await bot.sendMessage(channelId, welcomeMessage, {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: '🍿 Explorer le catalogue',
+                callback_data: 'welcome_anime'
+              },
+              {
+                text: '🤖 Parler au bot',
+                url: 'https://t.me/Atomic_flix_verifier_bot'
+              }
+            ]
+          ]
+        }
+      });
+    }
     
     console.log(`PUBLIC welcome message posted successfully in channel for ${username}`);
     

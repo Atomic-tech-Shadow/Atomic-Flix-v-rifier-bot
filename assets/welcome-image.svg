@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Anime style gradient -->
+    <linearGradient id="animeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="33%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="66%" style="stop-color:#45b7d1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#96ceb4;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Text shadow filter -->
+    <filter id="textShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="100" cy="80" r="40" fill="#ff6b6b" opacity="0.1"/>
+  <circle cx="700" cy="320" r="60" fill="#4ecdc4" opacity="0.1"/>
+  <circle cx="650" cy="100" r="30" fill="#96ceb4" opacity="0.1"/>
+  <circle cx="150" cy="300" r="50" fill="#45b7d1" opacity="0.1"/>
+  
+  <!-- Anime-style geometric shapes -->
+  <polygon points="50,200 100,150 150,200 100,250" fill="#ff6b6b" opacity="0.2"/>
+  <polygon points="650,50 700,25 750,50 700,75" fill="#4ecdc4" opacity="0.2"/>
+  
+  <!-- Main logo area -->
+  <rect x="150" y="100" width="500" height="200" rx="20" fill="rgba(255,255,255,0.1)" stroke="url(#animeGradient)" stroke-width="2"/>
+  
+  <!-- ATOMIC FLIX logo text -->
+  <text x="400" y="160" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="48" font-weight="bold" fill="url(#animeGradient)" filter="url(#textShadow)">
+    ATOMIC FLIX
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" opacity="0.9">
+    Communauté Anime Francophone
+  </text>
+  
+  <!-- Welcome message -->
+  <text x="400" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#4ecdc4" filter="url(#glow)">
+    🎉 BIENVENUE ! 🎉
+  </text>
+  
+  <!-- Features icons and text -->
+  <g transform="translate(200, 250)">
+    <!-- Anime icon -->
+    <circle cx="0" cy="0" r="20" fill="#ff6b6b" opacity="0.8"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">🎌</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ffffff">1000+ Animes</text>
+  </g>
+  
+  <g transform="translate(300, 250)">
+    <!-- HD Quality icon -->
+    <circle cx="0" cy="0" r="20" fill="#4ecdc4" opacity="0.8"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">📺</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ffffff">Qualité HD</text>
+  </g>
+  
+  <g transform="translate(400, 250)">
+    <!-- Updates icon -->
+    <circle cx="0" cy="0" r="20" fill="#45b7d1" opacity="0.8"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">🔄</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ffffff">Quotidien</text>
+  </g>
+  
+  <g transform="translate(500, 250)">
+    <!-- Community icon -->
+    <circle cx="0" cy="0" r="20" fill="#96ceb4" opacity="0.8"/>
+    <text x="0" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="20">💬</text>
+    <text x="0" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ffffff">Communauté</text>
+  </g>
+  
+  <!-- Decorative anime-style stars -->
+  <text x="120" y="60" font-family="Arial, sans-serif" font-size="24" fill="#ff6b6b" opacity="0.6">✨</text>
+  <text x="680" y="80" font-family="Arial, sans-serif" font-size="20" fill="#4ecdc4" opacity="0.6">✨</text>
+  <text x="750" y="180" font-family="Arial, sans-serif" font-size="18" fill="#96ceb4" opacity="0.6">✨</text>
+  <text x="80" y="350" font-family="Arial, sans-serif" font-size="22" fill="#45b7d1" opacity="0.6">✨</text>
+  
+  <!-- Bottom decorative line -->
+  <line x1="100" y1="350" x2="700" y2="350" stroke="url(#animeGradient)" stroke-width="3" opacity="0.5"/>
+  
+  <!-- Anime-style kawaii faces -->
+  <text x="50" y="150" font-family="Arial, sans-serif" font-size="16" fill="#ff6b6b" opacity="0.4">( ◕ ω ◕ )</text>
+  <text x="700" y="250" font-family="Arial, sans-serif" font-size="16" fill="#4ecdc4" opacity="0.4">(๑˃ᴗ˂)ﻭ</text>
+</svg>
