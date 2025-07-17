@@ -11,10 +11,12 @@ app.use(express.urlencoded({ extended: true }));
 // Import API routes
 const healthRoute = require('./api/health');
 const verifySubscriptionRoute = require('./api/verify-subscription');
+const getUserIdRoute = require('./api/get-user-id');
 
 // API routes
 app.get('/api/health', healthRoute);
 app.post('/api/verify-subscription', verifySubscriptionRoute);
+app.get('/api/get-user-id', getUserIdRoute);
 
 // Root route
 app.get('/', (req, res) => {
