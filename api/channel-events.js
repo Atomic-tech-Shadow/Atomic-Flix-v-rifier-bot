@@ -70,22 +70,17 @@ async function sendWelcomeMessage(bot, user) {
     
     console.log(`Sending PUBLIC welcome message for new member: ${username} (${userId})`);
     
-    // Message de bienvenue public dans le canal @Atomic_flix_officiel
+    // Message de bienvenue PUBLIC dans le canal
     const welcomeMessage = 
-      `🎉 Bienvenue sur ATOMIC FLIX, ${firstName} !\n\n` +
-      `🍿 Félicitations ! Vous venez de rejoindre la plus grande communauté d'animes francophone.\n\n` +
-      `✨ Votre accès premium inclut :\n` +
-      `• 🎌 Animes en exclusivité\n` +
-      `• 📺 Épisodes en haute qualité\n` +
-      `• 🔄 Mises à jour quotidiennes\n` +
-      `• 💬 Communauté otaku active de +1000 membres\n\n` +
-      `🚀 Pour commencer :\n` +
-      `• Explorez notre catalogue avec /anime\n` +
-      `• Vérifiez votre statut avec /status\n` +
-      `• Découvrez les avantages avec /premium\n\n` +
-      `🎁 Bonus de bienvenue :\n` +
-      `Accès immédiat à tous nos contenus anime premium !\n\n` +
-      `Merci de nous faire confiance ! 🙏`;
+      `🎉 ATOMIC FLIX vous souhaite la bienvenue ${username} !\n\n` +
+      `🍿 Nous vous remercions de rejoindre notre communauté d'anime francophone et d'utiliser nos services premium.\n\n` +
+      `✨ En tant que nouveau membre, vous avez maintenant accès à :\n` +
+      `• 🎌 Plus de 1000 animes en exclusivité\n` +
+      `• 📺 Épisodes en très haute qualité\n` +
+      `• 🔄 Nouveautés ajoutées quotidiennement\n` +
+      `• 💬 Communauté otaku active et passionnée\n\n` +
+      `🎁 Nous espérons que vous apprécierez votre expérience ATOMIC FLIX !\n\n` +
+      `Bonne découverte dans l'univers des animes ! 🙏✨`;
     
     // ENVOYER LE MESSAGE PUBLIQUEMENT DANS LE CANAL
     const channelId = '@Atomic_flix_officiel';
@@ -94,18 +89,12 @@ async function sendWelcomeMessage(bot, user) {
         inline_keyboard: [
           [
             {
-              text: '🍿 Découvrir les animes',
+              text: '🍿 Explorer le catalogue',
               callback_data: 'welcome_anime'
             },
             {
-              text: '📊 Mon statut premium',
-              callback_data: 'verify_subscription'
-            }
-          ],
-          [
-            {
-              text: '🎬 Rejoindre la communauté',
-              url: 'https://t.me/Atomic_flix_officiel'
+              text: '🤖 Parler au bot',
+              url: 'https://t.me/Atomic_flix_verifier_bot'
             }
           ]
         ]

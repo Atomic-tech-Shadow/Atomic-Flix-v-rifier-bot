@@ -11,16 +11,14 @@ app.use(express.urlencoded({ extended: true }));
 // Import API routes
 const healthRoute = require('./api/health');
 const verifySubscriptionRoute = require('./api/verify-subscription');
-const getUserIdRoute = require('./api/get-user-id');
-const botInfoRoute = require('./api/bot-info-simple');
+const botInfoRoute = require('./api/bot-info');
 const sendMessageRoute = require('./api/send-message');
-const webhookHandlerRoute = require('./api/webhook-handler');
+const webhookHandlerRoute = require('./api/webhook');
 const setCommandsRoute = require('./api/set-commands');
 
 // API routes
 app.get('/api/health', healthRoute);
 app.post('/api/verify-subscription', verifySubscriptionRoute);
-app.get('/api/get-user-id', getUserIdRoute);
 app.get('/api/bot-info', botInfoRoute);
 app.post('/api/send-message', sendMessageRoute);
 app.post('/api/webhook', webhookHandlerRoute);
