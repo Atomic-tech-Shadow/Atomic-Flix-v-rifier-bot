@@ -561,14 +561,13 @@ async function sendWelcomeMessage(bot, user) {
     // Message de bienvenue PUBLIC dans le canal
     const welcomeMessage = 
       `🎉 ATOMIC FLIX vous souhaite la bienvenue ${username} !\n\n` +
-      `🍿 Nous vous remercions de rejoindre notre communauté d'anime francophone et d'utiliser nos services premium.\n\n` +
-      `✨ En tant que nouveau membre, vous avez maintenant accès à :\n` +
-      `• 🎌 Plus de 1000 animes en exclusivité\n` +
-      `• 📺 Épisodes en très haute qualité\n` +
-      `• 🔄 Nouveautés ajoutées quotidiennement\n` +
-      `• 💬 Communauté otaku active et passionnée\n\n` +
-      `🎁 Nous espérons que vous apprécierez votre expérience ATOMIC FLIX !\n\n` +
-      `Bonne découverte dans l'univers des animes ! 🙏✨`;
+      `🍿 Merci de rejoindre notre communauté anime et d'utiliser nos services premium.\n\n` +
+      `✨ Votre accès inclut :\n` +
+      `• 🎌 1000+ animes exclusifs\n` +
+      `• 📺 Qualité HD + sous-titres français\n` +
+      `• 🔄 Nouveautés quotidiennes\n` +
+      `• 💬 Communauté otaku passionnée\n\n` +
+      `Bonne découverte ! 🙏✨`;
     
     // PUBLIER LE MESSAGE DANS LE CANAL PUBLIC
     const channelId = '@Atomic_flix_officiel';
