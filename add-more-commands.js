@@ -6,11 +6,11 @@ async function addMoreCommands() {
     
     const bot = getBotInstance();
     
-    // Commandes étendues pour ATOMIC FLIX
+    // Commandes étendues pour ATOMIC FLIX (focus animes)
     const commands = [
       {
         command: 'start',
-        description: '🎬 Démarrer le bot ATOMIC FLIX'
+        description: '🍿 Démarrer le bot ATOMIC FLIX'
       },
       {
         command: 'verify',
@@ -23,10 +23,6 @@ async function addMoreCommands() {
       {
         command: 'anime',
         description: '🍿 Découvrir les nouveaux animes'
-      },
-      {
-        command: 'movies',
-        description: '🎭 Films et séries disponibles'
       },
       {
         command: 'channel',

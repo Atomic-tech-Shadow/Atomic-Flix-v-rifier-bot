@@ -141,14 +141,13 @@ module.exports = async (req, res) => {
           `• /start - Démarrer le bot\n` +
           `• /verify - Vérifier votre abonnement\n` +
           `• /anime - Découvrir les nouveaux animes\n` +
-          `• /movies - Films et séries disponibles\n` +
           `• /channel - Rejoindre le canal officiel\n` +
           `• /status - Statut de votre abonnement\n` +
           `• /about - À propos d'ATOMIC FLIX\n` +
           `• /support - Support et assistance\n` +
           `• /premium - Avantages premium\n` +
           `• /help - Afficher cette aide\n\n` +
-          `Pour accéder aux contenus, vous devez être abonné au canal @Atomic_flix_officiel.`,
+          `Pour accéder aux animes, vous devez être abonné au canal @Atomic_flix_officiel.`,
           {
             reply_markup: {
               inline_keyboard: [
@@ -193,21 +192,16 @@ module.exports = async (req, res) => {
         );
       } else if (text.startsWith('/movies')) {
         await bot.sendMessage(chatId, 
-          `🎭 Films et Séries ATOMIC FLIX\n\n` +
-          `🎬 Nouveautés :\n` +
-          `• Films d'action récents\n` +
-          `• Séries Netflix populaires\n` +
-          `• Drames coréens tendance\n` +
-          `• Comédies françaises\n` +
-          `• Documentaires exclusifs\n\n` +
-          `Accédez à notre catalogue complet !`,
+          `🍿 Cette commande n'est plus disponible.\n\n` +
+          `ATOMIC FLIX se concentre maintenant exclusivement sur les animes !\n\n` +
+          `Utilisez /anime pour découvrir notre catalogue complet d'animes.`,
           {
             reply_markup: {
               inline_keyboard: [
                 [
                   {
-                    text: '🎬 Voir le catalogue',
-                    url: 'https://t.me/Atomic_flix_officiel'
+                    text: '🍿 Voir les animes',
+                    callback_data: 'welcome_anime'
                   }
                 ]
               ]
@@ -287,18 +281,18 @@ module.exports = async (req, res) => {
       } else if (text.startsWith('/about')) {
         await bot.sendMessage(chatId, 
           `📖 À propos d'ATOMIC FLIX\n\n` +
-          `🎬 **Votre plateforme de streaming premium**\n\n` +
+          `🍿 **Votre plateforme anime premium**\n\n` +
           `✨ **Nos services :**\n` +
           `• Animes en haute qualité\n` +
-          `• Films et séries récents\n` +
+          `• Épisodes récents et classiques\n` +
           `• Contenus exclusifs\n` +
-          `• Communauté active\n\n` +
+          `• Communauté otaku active\n\n` +
           `🚀 **Pourquoi nous choisir :**\n` +
-          `• Catalogue mis à jour quotidiennement\n` +
+          `• Catalogue anime mis à jour quotidiennement\n` +
           `• Support technique 24/7\n` +
           `• Interface moderne et intuitive\n` +
-          `• Accès illimité aux contenus\n\n` +
-          `Rejoignez plus de 1000 membres satisfaits !`,
+          `• Accès illimité aux animes\n\n` +
+          `Rejoignez plus de 1000 otakus satisfaits !`,
           {
             reply_markup: {
               inline_keyboard: [
@@ -343,19 +337,19 @@ module.exports = async (req, res) => {
         await bot.sendMessage(chatId, 
           `💎 Avantages Premium ATOMIC FLIX\n\n` +
           `🎯 **Votre accès premium inclut :**\n\n` +
-          `🎬 **Contenus exclusifs :**\n` +
-          `• Films en avant-première\n` +
-          `• Séries dès leur sortie\n` +
+          `🍿 **Contenus anime exclusifs :**\n` +
+          `• Animes en avant-première\n` +
+          `• Épisodes dès leur sortie au Japon\n` +
           `• Animes sous-titrés français\n` +
-          `• Documentaires rares\n\n` +
+          `• Collections complètes rares\n\n` +
           `⚡ **Fonctionnalités premium :**\n` +
           `• Téléchargement illimité\n` +
           `• Qualité 4K disponible\n` +
           `• Aucune publicité\n` +
           `• Support prioritaire\n\n` +
-          `💬 **Communauté VIP :**\n` +
+          `💬 **Communauté Otaku VIP :**\n` +
           `• Accès aux discussions privées\n` +
-          `• Votes pour les prochains contenus\n` +
+          `• Votes pour les prochains animes\n` +
           `• Concours exclusifs\n\n` +
           `Rejoignez dès maintenant !`,
           {
@@ -483,18 +477,13 @@ module.exports = async (req, res) => {
         );
       } else if (callbackData === 'welcome_movies') {
         await bot.editMessageText(
-          `🎭 Bienvenue dans notre cinéma premium !\n\n` +
-          `🎬 **Nouveautés cette semaine :**\n` +
-          `• Films d'action Hollywood\n` +
-          `• Drames coréens trending\n` +
-          `• Comédies françaises\n` +
-          `• Documentaires exclusifs\n` +
-          `• Séries Netflix/Prime\n\n` +
-          `🌟 **Qualité premium :**\n` +
-          `• 4K Ultra HD disponible\n` +
-          `• Sous-titres multiples\n` +
-          `• Téléchargement illimité\n\n` +
-          `Utilisez /movies pour explorer !`,
+          `🍿 ATOMIC FLIX se concentre maintenant exclusivement sur les animes !\n\n` +
+          `🎌 **Notre catalogue anime premium :**\n` +
+          `• Animes populaires mis à jour quotidiennement\n` +
+          `• Tous les genres : Shonen, Seinen, Josei\n` +
+          `• Qualité HD avec sous-titres français\n` +
+          `• Épisodes disponibles dès leur sortie\n\n` +
+          `Rejoignez notre communauté otaku !`,
           {
             chat_id: chatId,
             message_id: update.callback_query.message.message_id,
@@ -502,7 +491,7 @@ module.exports = async (req, res) => {
               inline_keyboard: [
                 [
                   {
-                    text: '🎬 Voir le catalogue',
+                    text: '🍿 Voir les animes',
                     url: 'https://t.me/Atomic_flix_officiel'
                   }
                 ]
@@ -572,18 +561,18 @@ async function sendWelcomeMessage(bot, user) {
     // Message de bienvenue personnalisé
     const welcomeMessage = 
       `🎉 Bienvenue sur ATOMIC FLIX, ${firstName} !\n\n` +
-      `🎬 Félicitations ! Vous venez de rejoindre la plus grande communauté de streaming francophone.\n\n` +
+      `🍿 Félicitations ! Vous venez de rejoindre la plus grande communauté d'animes francophone.\n\n` +
       `✨ **Votre accès premium inclut :**\n` +
-      `• 🍿 Animes en exclusivité\n` +
-      `• 🎭 Films et séries récents\n` +
-      `• 📺 Contenus 4K sans publicité\n` +
-      `• 💬 Communauté active de +1000 membres\n\n` +
+      `• 🎌 Animes en exclusivité\n` +
+      `• 📺 Épisodes en haute qualité\n` +
+      `• 🔄 Mises à jour quotidiennes\n` +
+      `• 💬 Communauté otaku active de +1000 membres\n\n` +
       `🚀 **Pour commencer :**\n` +
       `• Explorez notre catalogue avec /anime\n` +
-      `• Découvrez les nouveautés avec /movies\n` +
-      `• Vérifiez votre statut avec /status\n\n` +
+      `• Vérifiez votre statut avec /status\n` +
+      `• Découvrez les nouveautés avec /help\n\n` +
       `🎁 **Bonus de bienvenue :**\n` +
-      `Accès immédiat à tous nos contenus premium !\n\n` +
+      `Accès immédiat à tous nos animes premium !\n\n` +
       `Merci de nous faire confiance ! 🙏`;
     
     await bot.sendMessage(userId, welcomeMessage, {
@@ -593,10 +582,6 @@ async function sendWelcomeMessage(bot, user) {
             {
               text: '🍿 Découvrir les animes',
               callback_data: 'welcome_anime'
-            },
-            {
-              text: '🎭 Voir les films',
-              callback_data: 'welcome_movies'
             }
           ],
           [
@@ -607,7 +592,7 @@ async function sendWelcomeMessage(bot, user) {
           ],
           [
             {
-              text: '🎬 Retour au canal',
+              text: '🎌 Retour au canal',
               url: 'https://t.me/Atomic_flix_officiel'
             }
           ]
