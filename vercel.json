@@ -1,4 +1,33 @@
 
 {
-  "version": 2
+  "version": 2,
+  "functions": {
+    "api/health.js": {
+      "maxDuration": 10
+    },
+    "api/verify-subscription.js": {
+      "maxDuration": 15
+    },
+    "api/webhook.js": {
+      "maxDuration": 10
+    },
+    "api/send-message.js": {
+      "maxDuration": 10
+    },
+    "api/set-commands.js": {
+      "maxDuration": 10
+    },
+    "api/bot-info.js": {
+      "maxDuration": 10
+    },
+    "api/channel-events.js": {
+      "maxDuration": 10
+    },
+    "api/growth-features.js": {
+      "maxDuration": 10
+    },
+    "api/anime-promotion.js": {
+      "maxDuration": 10
+    }
+  }
 }

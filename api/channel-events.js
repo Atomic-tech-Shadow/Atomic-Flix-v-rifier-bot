@@ -68,26 +68,28 @@ async function sendWelcomeMessage(bot, user) {
     const firstName = user.first_name || 'Nouveau membre';
     const username = user.username ? `@${user.username}` : firstName;
     
-    console.log(`Sending welcome message to new member: ${username} (${userId})`);
+    console.log(`Sending PUBLIC welcome message for new member: ${username} (${userId})`);
     
-    // Message de bienvenue personnalisé
+    // Message de bienvenue public dans le canal @Atomic_flix_officiel
     const welcomeMessage = 
       `🎉 Bienvenue sur ATOMIC FLIX, ${firstName} !\n\n` +
-      `🎬 Félicitations ! Vous venez de rejoindre la plus grande communauté de streaming francophone.\n\n` +
-      `✨ **Votre accès premium inclut :**\n` +
-      `• 🍿 Animes en exclusivité\n` +
-      `• 🎭 Films et séries récents\n` +
-      `• 📺 Contenus 4K sans publicité\n` +
-      `• 💬 Communauté active de +1000 membres\n\n` +
-      `🚀 **Pour commencer :**\n` +
+      `🍿 Félicitations ! Vous venez de rejoindre la plus grande communauté d'animes francophone.\n\n` +
+      `✨ Votre accès premium inclut :\n` +
+      `• 🎌 Animes en exclusivité\n` +
+      `• 📺 Épisodes en haute qualité\n` +
+      `• 🔄 Mises à jour quotidiennes\n` +
+      `• 💬 Communauté otaku active de +1000 membres\n\n` +
+      `🚀 Pour commencer :\n` +
       `• Explorez notre catalogue avec /anime\n` +
-      `• Découvrez les nouveautés avec /movies\n` +
-      `• Vérifiez votre statut avec /status\n\n` +
-      `🎁 **Bonus de bienvenue :**\n` +
-      `Accès immédiat à tous nos contenus premium !\n\n` +
+      `• Vérifiez votre statut avec /status\n` +
+      `• Découvrez les avantages avec /premium\n\n` +
+      `🎁 Bonus de bienvenue :\n` +
+      `Accès immédiat à tous nos contenus anime premium !\n\n` +
       `Merci de nous faire confiance ! 🙏`;
     
-    await bot.sendMessage(userId, welcomeMessage, {
+    // ENVOYER LE MESSAGE PUBLIQUEMENT DANS LE CANAL
+    const channelId = '@Atomic_flix_officiel';
+    await bot.sendMessage(channelId, welcomeMessage, {
       reply_markup: {
         inline_keyboard: [
           [
@@ -96,19 +98,13 @@ async function sendWelcomeMessage(bot, user) {
               callback_data: 'welcome_anime'
             },
             {
-              text: '🎭 Voir les films',
-              callback_data: 'welcome_movies'
-            }
-          ],
-          [
-            {
               text: '📊 Mon statut premium',
               callback_data: 'verify_subscription'
             }
           ],
           [
             {
-              text: '🎬 Retour au canal',
+              text: '🎬 Rejoindre la communauté',
               url: 'https://t.me/Atomic_flix_officiel'
             }
           ]
@@ -116,14 +112,18 @@ async function sendWelcomeMessage(bot, user) {
       }
     });
     
-    console.log(`Welcome message sent successfully to ${username}`);
+    console.log(`PUBLIC welcome message sent successfully to channel for ${username}`);
     
   } catch (error) {
-    console.error('Error sending welcome message:', error);
+    console.error('Error sending PUBLIC welcome message:', error);
     
-    // Si l'envoi privé échoue, ne pas faire d'erreur
+    // Log détaillé de l'erreur
     if (error.code === 403) {
-      console.log(`User ${user.id} has blocked private messages`);
+      console.log(`Bot does not have permission to send messages to channel`);
+    } else if (error.code === 400) {
+      console.log(`Bad request - channel may not exist or bot not added`);
+    } else {
+      console.log(`Error code: ${error.code}, message: ${error.message}`);
     }
   }
 }

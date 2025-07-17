@@ -4,11 +4,22 @@
 
 This is a Node.js backend service deployed on Vercel that verifies Telegram channel subscriptions for the ATOMIC FLIX mobile application. The service uses the Telegram Bot API to check if users are subscribed to the @Atomic_flix_officiel channel.
 
-**Status: ✅ RESOLVED - Bot fully functional and responding to users**
+**Status: ✅ RESOLVED - Bot fully functional with PUBLIC welcome messages in channel**
 
 ## Recent Changes
 
-### July 17, 2025
+### July 17, 2025 - Final Update
+- ✅ **CRITICAL FIX: Welcome messages now sent PUBLIC in @Atomic_flix_officiel channel**
+- ✅ **DEPLOYMENT FIX: Reduced serverless functions from 13 to 9 (Vercel Hobby limit)**
+- ✅ **ANIME FOCUS: Removed /movies command, platform 100% anime-focused**
+- ✅ Updated vercel.json with function timeouts and optimization
+- ✅ Tested public welcome messaging - confirmed working
+- ✅ Removed duplicate/unused functions: bot-info-simple.js, get-user-id.js, test-mode.js, webhook-handler.js
+- ✅ Created deployment validation script (deploy-final.js)
+- ✅ Updated channel-events.js to send welcome messages to channel instead of private
+- ✅ All bot responses now anime-themed with otaku community branding
+
+### Previous Implementation (July 17, 2025)
 - ✅ Created complete backend architecture with all required endpoints
 - ✅ Implemented Telegram Bot API integration using `node-telegram-bot-api`
 - ✅ Configured bot token authentication (BOT_TOKEN environment variable)
