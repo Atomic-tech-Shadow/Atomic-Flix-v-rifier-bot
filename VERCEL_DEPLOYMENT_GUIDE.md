@@ -31,15 +31,7 @@ Vercel détectera automatiquement :
       "src": "/api/(.*)",
       "dest": "/api/$1"
     }
-  ],
-  "functions": {
-    "api/health.js": {
-      "maxDuration": 10
-    },
-    "api/verify-subscription.js": {
-      "maxDuration": 15
-    }
-  }
+  ]
 }
 ```
 
@@ -174,8 +166,9 @@ Vercel créera automatiquement une fonction serverless pour chaque fichier :
 - S'assurer que `vercel.json` est correct
 
 ### Erreur "Function timeout"
-- Augmenter `maxDuration` dans `vercel.json`
+- Les fonctions Vercel ont une limite de 10s par défaut
 - Optimiser le code pour être plus rapide
+- Éviter les opérations longues
 
 ### Erreur "Environment variable"
 - Ajouter `BOT_TOKEN` dans Vercel Dashboard
