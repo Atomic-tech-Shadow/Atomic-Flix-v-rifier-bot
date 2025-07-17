@@ -12,11 +12,13 @@ This is a Node.js backend service deployed on Vercel that verifies Telegram chan
 - ✅ Created complete backend architecture with all required endpoints
 - ✅ Implemented Telegram Bot API integration using `node-telegram-bot-api`
 - ✅ Configured bot token authentication (BOT_TOKEN environment variable)
+- ✅ **UPDATED: Integrated bot token directly in code** (8136643576:AAEIwUDrBN_0LOn2eqQZdzhZZuFzaGgfNwg)
 - ✅ Added comprehensive error handling for all Telegram API scenarios
 - ✅ Tested all endpoints locally - health check and subscription verification working
 - ✅ Created README.md with complete documentation and usage examples
 - ✅ Configured CORS for React Native mobile app integration
 - ✅ Added local development server (server.js) for testing purposes
+- ✅ Simplified deployment by removing environment variable requirements
 
 ## User Preferences
 

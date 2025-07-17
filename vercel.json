@@ -19,9 +19,5 @@
     "api/verify-subscription.js": {
       "maxDuration": 15
     }
-  },
-  "env": {
-    "BOT_TOKEN": "@bot_token",
-    "CHANNEL_ID": "@channel_id"
   }
 }

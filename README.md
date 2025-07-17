@@ -4,10 +4,12 @@ Backend Node.js déployé sur Vercel pour vérifier les abonnements Telegram du 
 
 ## 🚀 Déploiement
 
-### Variables d'environnement requises
+### Configuration
 
-- `BOT_TOKEN` : Token du bot Telegram (obtenu via @BotFather)
+- `BOT_TOKEN` : Token du bot Telegram intégré directement dans le code
 - `CHANNEL_ID` : @Atomic_flix_officiel (configuré par défaut)
+
+**Note :** Le token du bot est maintenant intégré directement dans `lib/telegramBot.js`, aucune variable d'environnement n'est requise.
 
 ### Commandes de déploiement
 
