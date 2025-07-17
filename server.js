@@ -72,6 +72,12 @@ app.use((error, req, res, next) => {
   });
 });
 
+// Route pour les fonctionnalités de croissance
+app.post('/api/growth-features', async (req, res) => {
+  const growthFeaturesHandler = require('./api/growth-features.js');
+  await growthFeaturesHandler(req, res);
+});
+
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 ATOMIC FLIX Telegram Backend running on port ${PORT}`);
