@@ -30,6 +30,15 @@ This is a Node.js backend service deployed on Vercel that verifies Telegram chan
 - ✅ **Command Management**: Dynamic bot command configuration
 - ✅ **Enhanced Error Handling**: Covers all Telegram API edge cases
 
+### React Native Integration Documentation
+- ✅ **Complete Integration Guide**: Step-by-step React Native implementation
+- ✅ **Subscription Gate Component**: Ready-to-use component for access control
+- ✅ **Custom Hook**: useSubscription hook for state management
+- ✅ **Service Layer**: SubscriptionService for API communication
+- ✅ **User Experience**: Smooth onboarding and subscription verification flow
+- ✅ **Error Handling**: Comprehensive error management for mobile apps
+- ✅ **Configuration Examples**: Real-world implementation examples
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
