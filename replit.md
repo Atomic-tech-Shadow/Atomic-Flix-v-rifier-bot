@@ -1,74 +1,8 @@
-# Atomic Flix Telegram Backend
+# ATOMIC FLIX Telegram Bot API
 
 ## Overview
 
-This is a Node.js backend service deployed on Vercel that verifies Telegram channel subscriptions for the ATOMIC FLIX mobile application. The service uses the Telegram Bot API to check if users are subscribed to the @Atomic_flix_officiel channel.
-
-**Status: ✅ COMPLETED - Bot fully functional with PUBLIC welcome messages + REAL ATOMIC FLIX logo**
-
-## Recent Changes
-
-### July 17, 2025 - Logo ATOMIC FLIX rond intégré
-- ✅ **LOGO RÉEL INTÉGRÉ: Vrai logo ATOMIC FLIX fourni par l'utilisateur intégré dans l'image d'accueil en format rond**
-- ✅ **IMAGE PNG CONVERTIE: Logo original converti en base64 et intégré directement dans le SVG**
-- ✅ **IMAGE PERSONNALISÉE: Le bot génère maintenant une image SVG style Canva avec la photo de profil de l'utilisateur**
-- ✅ **MESSAGE D'ACCUEIL AUTOMATIQUE: Le bot publie maintenant un message de bienvenue PUBLIC dans le canal @Atomic_flix_officiel pour chaque nouvel abonné**
-- ✅ **PERSONNALISATION AVANCÉE: L'image contient le nom d'utilisateur, date d'inscription, et photo de profil Telegram**
-- ✅ **DESIGN PROFESSIONNEL: Image style Canva avec dégradés anime, icons fonctionnalités, éléments kawaii**
-- ✅ **CORRECTION SERVEUR: Résolu l'erreur "Cannot find module './api/get-user-id'" qui empêchait le démarrage**
-- ✅ **SYSTÈME FALLBACK: Si la génération d'image échoue, envoi du message texte optimisé**
-- ✅ **MESSAGE OPTIMISÉ: "ATOMIC FLIX vous souhaite la bienvenue @nom ! Merci de rejoindre notre communauté anime..."**
-- ✅ Serveur redémarré avec succès - fonctionnel sur port 5000
-
-### July 17, 2025 - Final Update
-- ✅ **CRITICAL FIX: Welcome messages now sent PUBLIC in @Atomic_flix_officiel channel**
-- ✅ **DEPLOYMENT FIX: Reduced serverless functions from 13 to 9 (Vercel Hobby limit)**
-- ✅ **ANIME FOCUS: Removed /movies command, platform 100% anime-focused**
-- ✅ Updated vercel.json with function timeouts and optimization
-- ✅ Tested public welcome messaging - confirmed working
-- ✅ Removed duplicate/unused functions: bot-info-simple.js, get-user-id.js, test-mode.js, webhook-handler.js
-- ✅ Created deployment validation script (deploy-final.js)
-- ✅ Updated channel-events.js to send welcome messages to channel instead of private
-- ✅ All bot responses now anime-themed with otaku community branding
-
-### Previous Implementation (July 17, 2025)
-- ✅ Created complete backend architecture with all required endpoints
-- ✅ Implemented Telegram Bot API integration using `node-telegram-bot-api`
-- ✅ Configured bot token authentication (BOT_TOKEN environment variable)
-- ✅ **UPDATED: Integrated bot token directly in code** (8136643576:AAEIwUDrBN_0LOn2eqQZdzhZZuFzaGgfNwg)
-- ✅ Added comprehensive error handling for all Telegram API scenarios
-- ✅ Tested all endpoints locally - health check and subscription verification working
-- ✅ Created README.md with complete documentation and usage examples
-- ✅ Configured CORS for React Native mobile app integration
-- ✅ Added local development server (server.js) for testing purposes
-- ✅ Simplified deployment by removing environment variable requirements
-
-### Advanced Features Implementation (Based on BotFather Documentation)
-- ✅ **Inline Keyboards**: Interactive buttons for subscription verification
-- ✅ **Bot Commands**: `/start`, `/verify`, `/help` with auto-configuration
-- ✅ **Message Delivery**: Send messages with optional inline keyboards
-- ✅ **Webhook Handler**: Real-time message processing and command handling
-- ✅ **Bot Info API**: Detailed bot information and capabilities
-- ✅ **User ID Resolution**: Extract user IDs from bot interactions
-- ✅ **Command Management**: Dynamic bot command configuration
-- ✅ **Enhanced Error Handling**: Covers all Telegram API edge cases
-
-### React Native Integration Documentation
-- ✅ **Complete Integration Guide**: Step-by-step React Native implementation
-- ✅ **Subscription Gate Component**: Ready-to-use component for access control
-- ✅ **Custom Hook**: useSubscription hook for state management
-- ✅ **Service Layer**: SubscriptionService for API communication
-- ✅ **User Experience**: Smooth onboarding and subscription verification flow
-- ✅ **Error Handling**: Comprehensive error management for mobile apps
-- ✅ **Configuration Examples**: Real-world implementation examples
-
-### ATOMIC FLIX Anime Platform Marketing
-- ✅ **Anime-Specific Promotion**: Tailored messages for otaku community
-- ✅ **Platform Features**: Technical highlights and glassmorphism design
-- ✅ **Latest Anime Content**: Popular series and manga integration
-- ✅ **Exclusive Content**: Premium features and community benefits
-- ✅ **Marketing Campaign**: Complete strategy for anime streaming platform
-- ✅ **Social Media Integration**: Multi-platform promotion strategy
+This is a Telegram bot backend API for ATOMIC FLIX, an anime streaming platform. The system is built as a serverless application designed to run on Vercel, providing subscription verification, user engagement features, and promotional content for an anime streaming service.
 
 ## User Preferences
 
@@ -77,107 +11,80 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Backend Architecture
-- **Platform**: Vercel serverless functions
+- **Framework**: Express.js for local development with serverless function support
+- **Deployment**: Vercel serverless functions
 - **Runtime**: Node.js
-- **Framework**: Express-style serverless functions
-- **API Pattern**: RESTful endpoints with CORS support
+- **API Style**: RESTful endpoints with CORS support for cross-origin requests
 
 ### Key Design Decisions
-- **Serverless Functions**: Chosen for scalability and cost-effectiveness on Vercel
-- **Stateless Design**: Each function call is independent, no persistent connections
-- **CORS Configuration**: Configured for React Native mobile app consumption
-- **Error Handling**: Comprehensive error handling for Telegram API edge cases
+- **Serverless-first**: Each API endpoint is designed as an independent serverless function
+- **Stateless operations**: No persistent storage, relying on Telegram's API for data
+- **CORS-enabled**: Full cross-origin support for web and mobile app integration
+- **Token-based authentication**: Uses Telegram Bot API token for authentication
 
 ## Key Components
 
-### API Endpoints
-1. **Health Check** (`/api/health.js`)
-   - GET endpoint to verify bot status
-   - Returns bot information and configuration
-   - Used for monitoring and debugging
+### API Endpoints (`/api/`)
+- **Health Check** (`health.js`): Bot status monitoring and connectivity verification
+- **Subscription Verification** (`verify-subscription.js`): Validates user subscription to the Telegram channel
+- **Bot Information** (`bot-info.js`): Retrieves comprehensive bot configuration and status
+- **Message Sending** (`send-message.js`): Sends messages to users with optional inline keyboards
+- **Webhook Handler** (`webhook.js`): Processes incoming Telegram updates and events
+- **Command Management** (`set-commands.js`): Configures bot commands in Telegram
+- **Channel Events** (`channel-events.js`): Handles new member events and channel interactions
+- **Growth Features** (`growth-features.js`): Promotional tools to encourage channel subscription
+- **Anime Promotion** (`anime-promotion.js`): Specialized content for anime platform promotion
 
-2. **Subscription Verification** (`/api/verify-subscription.js`)
-   - POST endpoint to check user subscription status
-   - Validates user membership in Telegram channel
-   - Returns subscription status and user information
+### Core Library (`/lib/`)
+- **Telegram Bot Client** (`telegramBot.js`): Centralized bot instance management and API wrapper
+- **SVG Image Generator** (`svgImageGenerator.js`): Creates custom welcome images for new users
+- **Logo Converter** (`logoConverter.js`): Handles ATOMIC FLIX branding assets
 
-3. **Bot Information** (`/api/bot-info-simple.js`)
-   - GET endpoint for detailed bot information
-   - Returns commands, features, and capabilities
-   - Used for bot management and debugging
-
-4. **Message Delivery** (`/api/send-message.js`)
-   - POST endpoint to send messages to users
-   - Supports inline keyboards and interactive buttons
-   - Handles delivery errors and user blocking
-
-5. **Command Management** (`/api/set-commands.js`)
-   - POST endpoint to configure bot commands
-   - Sets up `/start`, `/verify`, and `/help` commands
-   - Integrates with Telegram's command interface
-
-6. **Webhook Handler** (`/api/webhook-handler.js`)
-   - POST endpoint for real-time message processing
-   - Handles commands and inline button interactions
-   - Provides automatic responses and subscription checks
-
-7. **User ID Resolution** (`/api/get-user-id.js`)
-   - GET endpoint to extract user IDs from bot interactions
-   - Useful for testing and user management
-   - Returns recent user activity and messages
-
-### Core Library
-- **Telegram Bot Handler** (`/lib/telegramBot.js`)
-  - Manages bot instance creation
-  - Handles subscription verification logic
-  - Provides error handling for common Telegram API issues
+### Configuration Files
+- **Vercel Config** (`vercel.json`): Deployment settings with function-specific timeouts
+- **Server** (`server.js`): Express server for local development
+- **Root Handler** (`index.js`): Main entry point with API documentation
 
 ## Data Flow
 
-1. **Health Check Flow**:
-   - Client → GET `/api/health` → Telegram Bot API → `getMe()` → Response
-
-2. **Subscription Verification Flow**:
-   - Client → POST `/api/verify-subscription` with `userId` → Telegram Bot API → `getChatMember()` → Subscription status response
+1. **User Interaction**: Users interact with the Telegram bot
+2. **Webhook Processing**: Telegram sends updates to the webhook endpoint
+3. **Event Routing**: Updates are processed and routed to appropriate handlers
+4. **Subscription Verification**: Channel membership is validated using Telegram's API
+5. **Response Generation**: Appropriate messages or content is sent back to users
+6. **Growth Tracking**: User engagement events trigger promotional features
 
 ## External Dependencies
 
-### Third-party Services
-- **Telegram Bot API**: Primary integration for user verification
-- **Vercel**: Hosting platform for serverless functions
+### Telegram Integration
+- **Primary Service**: Telegram Bot API for all bot operations
+- **Channel**: @Atomic_flix_officiel (main subscription channel)
+- **Bot Token**: Hardcoded for production (8136643576:AAEIwUDrBN_0LOn2eqQZdzhZZuFzaGgfNwg)
 
 ### NPM Packages
-- `node-telegram-bot-api`: Official Telegram Bot API wrapper
-- Built-in Node.js modules for HTTP handling
+- **node-telegram-bot-api**: Core Telegram bot functionality
+- **express**: Web framework for local development
+- **axios**: HTTP client for external API calls
+- **canvas**: Image generation capabilities for custom graphics
 
-### Authentication
-- Bot token authentication with Telegram API
-- Environment variable-based configuration
+### Content Management
+- **Static Assets**: Logo and branding materials stored locally
+- **Dynamic Content**: Anime-specific promotional content generated programmatically
 
 ## Deployment Strategy
 
-### Environment Variables
-- `BOT_TOKEN`: Telegram bot authentication token
-- `CHANNEL_ID`: Target channel identifier (@Atomic_flix_officiel)
+### Vercel Serverless
+- **Platform**: Vercel for automatic scaling and global distribution
+- **Function Timeouts**: Configured per endpoint (10-15 seconds max)
+- **Environment**: Production bot token embedded in code
+- **CORS**: Configured for universal access to support web and mobile clients
 
-### Vercel Configuration
-- **Build Process**: Automatic deployment from source
-- **Function Timeouts**: 10s for health, 15s for verification
-- **CORS**: Configured for cross-origin requests from mobile app
-- **Error Handling**: Comprehensive error responses for client debugging
+### Development vs Production
+- **Local Development**: Express server with full routing
+- **Production**: Individual serverless functions with shared library code
+- **Configuration**: Environment-aware bot token and channel ID management
 
-### Monitoring
-- Built-in health check endpoint for service monitoring
-- Structured logging for debugging and maintenance
-- Error categorization for different failure modes
-
-## Error Handling Strategy
-
-The system handles various Telegram API error scenarios:
-- User not found in system
-- Channel access issues
-- Bot authorization problems
-- Network connectivity issues
-- Invalid request parameters
-
-Each error type returns appropriate HTTP status codes and structured error messages for client-side handling.
+### Scaling Considerations
+- **Stateless Design**: Each function call is independent
+- **Rate Limiting**: Relies on Telegram's built-in rate limits
+- **Error Handling**: Comprehensive error responses with appropriate HTTP status codes
