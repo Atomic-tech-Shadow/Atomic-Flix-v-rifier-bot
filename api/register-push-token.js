@@ -5,33 +5,7 @@ const { getBotInstance } = require('../lib/telegramBot');
 // Stockage persistant des tokens (en production, utiliser une vraie DB)
 const userPushTokens = new Map();
 
-// Mode démo - tokens simulés pour test sans app mobile
-const DEMO_MODE = true;
-if (DEMO_MODE) {
-  // Simuler quelques utilisateurs pour les tests
-  userPushTokens.set('demo_user_1', {
-    pushToken: 'ExponentPushToken[demo-token-1-xxxxxxxxxxxxxxxxxx]',
-    deviceInfo: { platform: 'android', version: '11' },
-    registeredAt: new Date().toISOString(),
-    lastActive: new Date().toISOString()
-  });
-  
-  userPushTokens.set('demo_user_2', {
-    pushToken: 'ExponentPushToken[demo-token-2-yyyyyyyyyyyyyyyyyy]',
-    deviceInfo: { platform: 'ios', version: '15.2' },
-    registeredAt: new Date().toISOString(),
-    lastActive: new Date().toISOString()
-  });
-  
-  userPushTokens.set('demo_user_3', {
-    pushToken: 'ExponentPushToken[demo-token-3-zzzzzzzzzzzzzzzzzz]',
-    deviceInfo: { platform: 'android', version: '12' },
-    registeredAt: new Date().toISOString(),
-    lastActive: new Date().toISOString()
-  });
-  
-  console.log('🎭 DEMO MODE: 3 simulated users registered for push notifications');
-}
+
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request

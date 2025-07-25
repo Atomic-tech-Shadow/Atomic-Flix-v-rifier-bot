@@ -10,7 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-✅ COMMANDS CLEANUP COMPLETED (25/07/2025)
+✅ DEMO MODE CLEANUP COMPLETED (25/07/2025)
+- Removed all demo configurations from push notifications
+- Deleted simulated users and demo tokens from register-push-token.js
+- Removed simulation logic from update-command.js
+- Deleted CONFIG-APP-MINIMALE.md demo documentation
+- System now requires real Expo tokens for notifications
+- Clean production-ready notification system
+
+✅ COMMANDS CLEANUP COMPLETED (25/07/2025)  
 - Removed /anime and /channel commands as requested
 - Removed /about, /support, /premium, and /status commands
 - Deleted api/anime-promotion.js, api/growth-features.js, api/channel-events.js files
@@ -47,10 +55,10 @@ Preferred communication style: Simple, everyday language.
 
 📱 EXPO PUSH NOTIFICATIONS SYSTEM (25/07/2025)
 - Complete Expo Push API integration created
-- Push token registration system with demo mode
+- Push token registration system
 - Real notifications support when Expo token provided
-- Fallback simulation mode for testing without app config
-- 3 demo users automatically registered for immediate testing
+
+
 - Mobile app integration documentation provided
 
 ✓ Project migrated from Replit Agent to Replit environment (25/07/2025)

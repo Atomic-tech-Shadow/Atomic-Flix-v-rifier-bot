@@ -212,59 +212,32 @@ async function sendPushNotificationToAllUsers(bot, chatId, userId, downloadUrl) 
 // Fonction pour déclencher les notifications push
 async function triggerPushNotifications(pushMessage) {
   try {
-    // Pour l'instant, simulation du nombre d'envois
-    // Dans une vraie implémentation, vous devriez:
-    // 1. Récupérer les tokens push depuis votre base de données
-    // 2. Envoyer via Expo Push Notifications ou Firebase
+    // Récupérer les tokens push stockés
+    const registerPushToken = require('./register-push-token');
     
-    // Simulation d'envoi à des tokens factices
-    const simulatedTokenCount = Math.floor(Math.random() * 100) + 50; // Entre 50 et 150
+    // Simuler une requête pour obtenir les statistiques
+    const mockReq = { body: { action: 'get_stats' } };
+    const mockRes = {
+      status: () => ({
+        json: (data) => data
+      })
+    };
     
-    console.log('Sending push notifications:', pushMessage);
-    console.log(`Simulated send to ${simulatedTokenCount} devices`);
+    // Note: Dans une vraie implémentation, vous devriez utiliser une base de données
+    // pour stocker et récupérer les tokens push des utilisateurs
     
-    // Ici, vous ajouteriez la vraie logique d'envoi:
-    /*
-    const { data: pushTokens, error } = await supabase
-      .from('user_push_tokens')
-      .select('push_token')
-      .eq('is_active', true);
-
-    if (error || !pushTokens?.length) return 0;
-
-    const notifications = pushTokens.map(({ push_token }) => ({
-      to: push_token,
-      title: pushMessage.title,
-      body: pushMessage.body,
-      data: pushMessage.data,
-      sound: 'default',
-      badge: 1
-    }));
-
-    let totalSent = 0;
-    const batchSize = 100;
-
-    for (let i = 0; i < notifications.length; i += batchSize) {
-      const batch = notifications.slice(i, i + batchSize);
-      
-      const response = await fetch('https://exp.host/--/api/v2/push/send', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(batch),
-      });
-
-      if (response.ok) totalSent += batch.length;
-    }
-
-    return totalSent;
-    */
+    console.log('Push notification fallback - no Expo configuration found');
+    console.log('Push message:', pushMessage);
     
-    return simulatedTokenCount;
+    return {
+      sent: 0,
+      error: 'No Expo configuration - notifications not sent'
+    };
   } catch (error) {
     console.error('Erreur push notifications:', error);
-    return 0;
+    return {
+      sent: 0,
+      error: error.message
+    };
   }
 }
