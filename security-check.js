@@ -42,9 +42,7 @@ async function checkBotSecurity() {
     const newCommands = [
       { command: 'start', description: '🎬 Démarrer le bot ATOMIC FLIX' },
       { command: 'verify', description: '✅ Vérifier votre abonnement au canal' },
-      { command: 'help', description: '❓ Afficher aide et commandes' },
-      { command: 'anime', description: '🍿 Découvrir les nouveaux animes' },
-      { command: 'channel', description: '📱 Rejoindre le canal officiel' }
+      { command: 'help', description: '❓ Afficher aide et commandes' }
     ];
     
     await bot.setMyCommands(newCommands);

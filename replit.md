@@ -10,6 +10,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+✅ COMMANDS CLEANUP COMPLETED (25/07/2025)
+- Removed /anime and /channel commands as requested
+- Deleted api/anime-promotion.js file and related routes
+- Updated bot command list to only include: /start, /verify, /help
+- Bot commands successfully updated in Telegram
+- Cleaned up server routes and webhook handlers
+
 ✅ SECURITY INCIDENT RESOLVED (25/07/2025)
 - Identified and removed malicious webhook (botelegram.work.gd)
 - Bot was compromised and sending Ethereum spam messages

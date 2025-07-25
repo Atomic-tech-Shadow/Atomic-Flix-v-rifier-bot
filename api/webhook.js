@@ -186,8 +186,7 @@ module.exports = async (req, res) => {
           `Commandes disponibles :\n` +
           `• /start - Démarrer le bot\n` +
           `• /verify - Vérifier votre abonnement\n` +
-          `• /anime - Découvrir les nouveaux animes\n` +
-          `• /channel - Rejoindre le canal officiel\n` +
+
           `• /status - Statut de votre abonnement\n` +
           `• /about - À propos d'ATOMIC FLIX\n` +
           `• /support - Support et assistance\n` +
@@ -207,35 +206,7 @@ module.exports = async (req, res) => {
             }
           }
         );
-      } else if (text.startsWith('/anime')) {
-        await bot.sendMessage(chatId, 
-          `🍿 Nouveaux Animes ATOMIC FLIX\n\n` +
-          `📺 Derniers épisodes :\n` +
-          `• Attack on Titan - Final Season\n` +
-          `• Demon Slayer - Saison 4\n` +
-          `• One Piece - Épisodes récents\n` +
-          `• Jujutsu Kaisen - Nouvelle saison\n` +
-          `• Naruto - Collection complète\n\n` +
-          `Rejoignez le canal pour accéder à tous les contenus !`,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: '🎬 Accéder aux animes',
-                    url: 'https://t.me/Atomic_flix_officiel'
-                  }
-                ],
-                [
-                  {
-                    text: '✅ Vérifier mon abonnement',
-                    callback_data: 'verify_subscription'
-                  }
-                ]
-              ]
-            }
-          }
-        );
+
       } else if (text.startsWith('/movies')) {
         await bot.sendMessage(chatId, 
           `🍿 Cette commande n'est plus disponible.\n\n` +
@@ -254,29 +225,7 @@ module.exports = async (req, res) => {
             }
           }
         );
-      } else if (text.startsWith('/channel')) {
-        await bot.sendMessage(chatId, 
-          `📱 Canal Officiel ATOMIC FLIX\n\n` +
-          `Rejoignez @Atomic_flix_officiel pour :\n` +
-          `• 🎬 Contenus exclusifs\n` +
-          `• 📺 Nouveautés en avant-première\n` +
-          `• 🍿 Recommandations personnalisées\n` +
-          `• 💬 Communauté active\n` +
-          `• 🎁 Concours et cadeaux\n\n` +
-          `Plus de 1000 membres nous font confiance !`,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: '📱 Rejoindre maintenant',
-                    url: 'https://t.me/Atomic_flix_officiel'
-                  }
-                ]
-              ]
-            }
-          }
-        );
+
       } else if (text.startsWith('/status')) {
         const { verifySubscription } = require('../lib/telegramBot');
         const result = await verifySubscription(userId.toString());
