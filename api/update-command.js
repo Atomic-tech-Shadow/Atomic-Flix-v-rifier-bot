@@ -156,7 +156,7 @@ async function sendPushNotificationToAllUsers(bot, chatId, userId, downloadUrl) 
       };
     }
 
-    await bot.sendMessage(chatId, '📲 ENVOI NOTIFICATIONS PUSH...');
+    await bot.sendMessage(chatId, '📲 ENVOI NOTIFICATIONS PUSH EXPO...');
 
     // Message de notification push
     const pushMessage = {
@@ -169,14 +169,25 @@ async function sendPushNotificationToAllUsers(bot, chatId, userId, downloadUrl) 
       }
     };
 
-    const notificationsSent = await triggerPushNotifications(pushMessage);
+    // Utiliser le système Expo Push réel
+    const { sendExpoPushNotification, isExpoConfigured } = require('./expo-push');
+    
+    let notificationResult;
+    if (isExpoConfigured()) {
+      // Envoyer de vraies notifications Expo
+      notificationResult = await sendExpoPushNotification(pushMessage, pushMessage.data);
+    } else {
+      // Fallback : simulation si Expo non configuré
+      notificationResult = await triggerPushNotifications(pushMessage);
+    }
 
     // Rapport final
     const report = `✅ NOTIFICATIONS ENVOYÉES\n\n` +
                   `💬 Titre: ${pushMessage.title}\n` +
                   `📝 Message: ${pushMessage.body}\n` +
                   `🔗 Lien: ${downloadUrl}\n` +
-                  `📲 Notifications envoyées: ${notificationsSent}\n` +
+                  `📲 Notifications: ${notificationResult.sent || notificationResult.notificationsSent}\n` +
+                  `${notificationResult.errors ? `❌ Erreurs: ${notificationResult.errors}\n` : ''}` +
                   `📅 ${new Date().toLocaleString('fr-FR')}`;
 
     await bot.sendMessage(chatId, report);
