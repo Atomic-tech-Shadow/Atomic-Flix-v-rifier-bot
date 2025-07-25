@@ -31,6 +31,12 @@
     },
     "api/update-command.js": {
       "maxDuration": 15
+    },
+    "api/security-middleware.js": {
+      "maxDuration": 10
+    },
+    "api/security-webhook.js": {
+      "maxDuration": 10
     }
   }
 }
