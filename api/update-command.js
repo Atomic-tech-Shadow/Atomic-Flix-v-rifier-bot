@@ -80,9 +80,9 @@ module.exports = async (req, res) => {
 
 // Fonction pour vérifier les permissions admin
 async function checkAdminPermissions(userId) {
-  // IDs des administrateurs (à configurer selon vos besoins)
+  // IDs des administrateurs
   const ADMIN_IDS = [
-    123456789, // Remplacez par votre ID Telegram réel
+    6968736907, // ID admin principal
     // Ajoutez d'autres IDs admin si nécessaire
   ];
   return ADMIN_IDS.includes(parseInt(userId));
