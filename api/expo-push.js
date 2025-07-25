@@ -116,16 +116,18 @@ async function sendExpoPushNotification(message, data = {}) {
       throw new Error('Expo access token not configured');
     }
     
-    if (userPushTokens.size === 0) {
+    // Obtenir les tokens actifs depuis l'API d'enregistrement
+    const { getActivePushTokens } = require('./register-push-token');
+    const tokens = getActivePushTokens();
+    
+    if (tokens.length === 0) {
       return {
         success: true,
-        message: 'No users registered for push notifications',
+        message: 'No active users registered for push notifications',
         sent: 0,
         simulation: true
       };
     }
-    
-    const tokens = Array.from(userPushTokens.values());
     const notifications = tokens.map(token => ({
       to: token,
       title: message.title || '🚀 ATOMIC FLIX',

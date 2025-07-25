@@ -40,6 +40,9 @@
     },
     "api/expo-push.js": {
       "maxDuration": 15
+    },
+    "api/register-push-token.js": {
+      "maxDuration": 10
     }
   }
 }
