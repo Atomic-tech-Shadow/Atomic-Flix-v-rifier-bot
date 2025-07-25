@@ -29,6 +29,13 @@ Preferred communication style: Simple, everyday language.
 - Auto-cleanup system for unauthorized webhook attempts
 - Protection active even if bot token is compromised
 
+🔧 UPDATE COMMAND CALLBACK FIX (25/07/2025)
+- Fixed BUTTON_DATA_INVALID error for long URLs
+- Added temporary storage system for callback data
+- URL IDs generated to bypass Telegram's 64-byte limit
+- System now supports any length APKPure URLs
+- Fully functional with new atomic-flix URL structure
+
 ✓ Project migrated from Replit Agent to Replit environment (25/07/2025)
 - Configured proper Node.js workflow with port 5000
 - Installed all required dependencies (express, axios, canvas, node-telegram-bot-api)

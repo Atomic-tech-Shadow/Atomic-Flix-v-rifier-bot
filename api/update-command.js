@@ -1,4 +1,5 @@
 const { getBotInstance } = require('../lib/telegramBot');
+const { storeTemporaryUrl } = require('../lib/tempStorage');
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request
@@ -110,6 +111,9 @@ async function handleUpdateCommand(bot, chatId, userId, downloadUrl) {
       };
     }
 
+    // Stocker l'URL temporairement pour éviter les limites callback_data
+    const urlId = storeTemporaryUrl(downloadUrl);
+    
     // Message de confirmation
     const confirmMessage = `🚀 ENVOYER NOTIFICATION MISE À JOUR\n\n` +
                           `📱 Lien: ${downloadUrl}\n` +
@@ -119,7 +123,7 @@ async function handleUpdateCommand(bot, chatId, userId, downloadUrl) {
     await bot.sendMessage(chatId, confirmMessage, {
       reply_markup: {
         inline_keyboard: [[
-          { text: '✅ Envoyer notification', callback_data: 'confirm_send_push' },
+          { text: '✅ Envoyer notification', callback_data: `push_${urlId}` },
           { text: '❌ Annuler', callback_data: 'cancel_update' }
         ]]
       }
