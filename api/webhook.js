@@ -88,6 +88,38 @@ module.exports = async (req, res) => {
             }
           }
         );
+      } else if (text.startsWith('/update ')) {
+        // Nouvelle commande /update
+        const downloadUrl = text.replace('/update ', '').trim();
+        
+        if (!downloadUrl) {
+          await bot.sendMessage(chatId, '❌ Veuillez fournir une URL de téléchargement.\n\nUsage: /update https://apkpure.com/fr/atomic-flix/...');
+          return res.status(200).json({ success: true, message: 'Invalid update command format' });
+        }
+        
+        // Appel de la fonction de gestion de la commande update
+        const updateCommandHandler = require('./update-command');
+        const updateRequest = {
+          method: 'POST',
+          body: {
+            chatId: chatId,
+            userId: userId,
+            downloadUrl: downloadUrl,
+            action: 'initiate_update'
+          }
+        };
+        
+        const updateResponse = {
+          setHeader: () => {},
+          status: (code) => ({
+            json: (data) => {
+              console.log('Update command response:', data);
+              return data;
+            }
+          })
+        };
+        
+        await updateCommandHandler(updateRequest, updateResponse);
       } else if (text.startsWith('/verify')) {
         // Check subscription status
         const { verifySubscription } = require('../lib/telegramBot');
@@ -525,6 +557,40 @@ module.exports = async (req, res) => {
             }
           }
         );
+      } else if (callbackData.startsWith('send_push:')) {
+        // Gestion du callback pour envoyer les notifications push
+        const downloadUrl = decodeURIComponent(callbackData.replace('send_push:', ''));
+        
+        // Appel de la fonction de gestion de l'envoi des notifications
+        const updateCommandHandler = require('./update-command');
+        const updateRequest = {
+          method: 'POST',
+          body: {
+            chatId: chatId,
+            userId: userId,
+            downloadUrl: downloadUrl,
+            action: 'send_push'
+          }
+        };
+        
+        const updateResponse = {
+          setHeader: () => {},
+          status: (code) => ({
+            json: (data) => {
+              console.log('Send push response:', data);
+              return data;
+            }
+          })
+        };
+        
+        await updateCommandHandler(updateRequest, updateResponse);
+        
+      } else if (callbackData === 'cancel_update') {
+        // Gestion du callback pour annuler l'envoi
+        await bot.editMessageText('❌ Envoi annulé.', {
+          chat_id: chatId,
+          message_id: update.callback_query.message.message_id
+        });
       }
       
       // Answer callback query to stop loading indicator

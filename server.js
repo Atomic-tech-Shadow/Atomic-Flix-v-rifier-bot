@@ -15,6 +15,7 @@ const botInfoRoute = require('./api/bot-info');
 const sendMessageRoute = require('./api/send-message');
 const webhookHandlerRoute = require('./api/webhook');
 const setCommandsRoute = require('./api/set-commands');
+const updateCommandRoute = require('./api/update-command');
 
 // API routes
 app.get('/api/health', healthRoute);
@@ -23,6 +24,7 @@ app.get('/api/bot-info', botInfoRoute);
 app.post('/api/send-message', sendMessageRoute);
 app.post('/api/webhook', webhookHandlerRoute);
 app.post('/api/set-commands', setCommandsRoute);
+app.post('/api/update-command', updateCommandRoute);
 
 // Root route
 app.get('/', (req, res) => {
@@ -40,7 +42,8 @@ app.get('/', (req, res) => {
       botInfo: 'GET /api/bot-info',
       sendMessage: 'POST /api/send-message',
       webhook: 'POST /api/webhook',
-      setCommands: 'POST /api/set-commands'
+      setCommands: 'POST /api/set-commands',
+      updateCommand: 'POST /api/update-command'
     },
     features: {
       subscriptionVerification: 'Verify user subscription to Telegram channel',
@@ -56,7 +59,8 @@ app.get('/', (req, res) => {
       botInfo: 'Get detailed bot information including commands and webhook status',
       sendMessage: 'Send messages to users with optional inline keyboards',
       webhook: 'Handle incoming webhook updates from Telegram',
-      setCommands: 'Configure bot commands in Telegram'
+      setCommands: 'Configure bot commands in Telegram',
+      updateCommand: 'Admin command to send push notifications for app updates'
     }
   });
 });

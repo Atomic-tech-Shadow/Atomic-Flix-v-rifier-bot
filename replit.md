@@ -8,6 +8,14 @@ This is a Telegram bot backend API for ATOMIC FLIX, an anime streaming platform.
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+✓ Added `/update` command for push notifications (25/07/2025)
+- Created new API endpoint `/api/update-command`
+- Integrated with webhook handler for button callbacks
+- Admin-only functionality with APKPure URL validation
+- Simulated push notification system ready for production integration
+
 ## System Architecture
 
 ### Backend Architecture
@@ -34,6 +42,7 @@ Preferred communication style: Simple, everyday language.
 - **Channel Events** (`channel-events.js`): Handles new member events and channel interactions
 - **Growth Features** (`growth-features.js`): Promotional tools to encourage channel subscription
 - **Anime Promotion** (`anime-promotion.js`): Specialized content for anime platform promotion
+- **Update Command** (`update-command.js`): Admin-only command to send push notifications for app updates
 
 ### Core Library (`/lib/`)
 - **Telegram Bot Client** (`telegramBot.js`): Centralized bot instance management and API wrapper
