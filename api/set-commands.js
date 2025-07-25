@@ -46,6 +46,10 @@ module.exports = async (req, res) => {
       {
         command: 'help',
         description: '❓ Afficher l\'aide et les commandes'
+      },
+      {
+        command: 'update',
+        description: '📱 Envoyer une notification de mise à jour'
       }
     ];
     

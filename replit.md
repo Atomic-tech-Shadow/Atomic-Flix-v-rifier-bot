@@ -14,7 +14,7 @@ Preferred communication style: Simple, everyday language.
 - Removed /anime and /channel commands as requested
 - Removed /about, /support, /premium, and /status commands
 - Deleted api/anime-promotion.js file and related routes
-- Updated bot command list to only include: /start, /verify, /help
+- Updated bot command list to only include: /start, /verify, /help, /update
 - Bot commands successfully updated in Telegram
 - Cleaned up server routes and webhook handlers
 
