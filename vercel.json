@@ -26,9 +26,7 @@
     "api/growth-features.js": {
       "maxDuration": 10
     },
-    "api/anime-promotion.js": {
-      "maxDuration": 10
-    },
+
     "api/update-command.js": {
       "maxDuration": 15
     },

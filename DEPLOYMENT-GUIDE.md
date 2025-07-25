@@ -18,7 +18,7 @@ Tous ces fichiers doivent être présents dans votre dépôt Vercel:
 - `api/update-command.js` ⭐ **NOUVEAU - À AJOUTER**
 - `api/channel-events.js`
 - `api/growth-features.js`
-- `api/anime-promotion.js`
+
 
 #### Bibliothèques
 - `lib/telegramBot.js`

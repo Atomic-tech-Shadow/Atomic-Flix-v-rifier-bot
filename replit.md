@@ -90,7 +90,7 @@ Preferred communication style: Simple, everyday language.
 - **Command Management** (`set-commands.js`): Configures bot commands in Telegram
 - **Channel Events** (`channel-events.js`): Handles new member events and channel interactions
 - **Growth Features** (`growth-features.js`): Promotional tools to encourage channel subscription
-- **Anime Promotion** (`anime-promotion.js`): Specialized content for anime platform promotion
+
 - **Update Command** (`update-command.js`): Admin-only command to send push notifications for app updates
 
 ### Core Library (`/lib/`)
