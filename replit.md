@@ -10,6 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+✅ SECURITY INCIDENT RESOLVED (25/07/2025)
+- Identified and removed malicious webhook (botelegram.work.gd)
+- Bot was compromised and sending Ethereum spam messages
+- Deleted unauthorized webhook and reset bot commands
+- Bot security fully restored - normal operation confirmed
+
 ✓ Project migrated from Replit Agent to Replit environment (25/07/2025)
 - Configured proper Node.js workflow with port 5000
 - Installed all required dependencies (express, axios, canvas, node-telegram-bot-api)
