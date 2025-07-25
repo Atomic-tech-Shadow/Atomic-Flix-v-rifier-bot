@@ -20,12 +20,7 @@
     "api/bot-info.js": {
       "maxDuration": 10
     },
-    "api/channel-events.js": {
-      "maxDuration": 10
-    },
-    "api/growth-features.js": {
-      "maxDuration": 10
-    },
+
 
     "api/update-command.js": {
       "maxDuration": 15

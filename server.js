@@ -80,11 +80,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-// Route pour les fonctionnalités de croissance
-app.post('/api/growth-features', async (req, res) => {
-  const growthFeaturesHandler = require('./api/growth-features.js');
-  await growthFeaturesHandler(req, res);
-});
+
 
 
 

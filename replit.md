@@ -13,10 +13,11 @@ Preferred communication style: Simple, everyday language.
 ✅ COMMANDS CLEANUP COMPLETED (25/07/2025)
 - Removed /anime and /channel commands as requested
 - Removed /about, /support, /premium, and /status commands
-- Deleted api/anime-promotion.js file and related routes
+- Deleted api/anime-promotion.js, api/growth-features.js, api/channel-events.js files
+- Cleaned up all references in vercel.json, server.js, and documentation
 - Updated bot command list to only include: /start, /verify, /help, /update
 - Bot commands successfully updated in Telegram
-- Cleaned up server routes and webhook handlers
+- Server routes and webhook handlers fully cleaned
 
 ✅ SECURITY INCIDENT RESOLVED (25/07/2025)
 - Identified and removed malicious webhook (botelegram.work.gd)
@@ -88,8 +89,7 @@ Preferred communication style: Simple, everyday language.
 - **Message Sending** (`send-message.js`): Sends messages to users with optional inline keyboards
 - **Webhook Handler** (`webhook.js`): Processes incoming Telegram updates and events
 - **Command Management** (`set-commands.js`): Configures bot commands in Telegram
-- **Channel Events** (`channel-events.js`): Handles new member events and channel interactions
-- **Growth Features** (`growth-features.js`): Promotional tools to encourage channel subscription
+
 
 - **Update Command** (`update-command.js`): Admin-only command to send push notifications for app updates
 

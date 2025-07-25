@@ -16,8 +16,7 @@ Tous ces fichiers doivent être présents dans votre dépôt Vercel:
 - `api/webhook.js` (avec support de /update)
 - `api/set-commands.js`
 - `api/update-command.js` ⭐ **NOUVEAU - À AJOUTER**
-- `api/channel-events.js`
-- `api/growth-features.js`
+
 
 
 #### Bibliothèques
