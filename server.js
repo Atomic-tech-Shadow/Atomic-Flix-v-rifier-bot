@@ -16,6 +16,8 @@ const sendMessageRoute = require('./api/send-message');
 const webhookHandlerRoute = require('./api/webhook');
 const setCommandsRoute = require('./api/set-commands');
 const updateCommandRoute = require('./api/update-command');
+const expoPushRoute = require('./api/expo-push');
+const registerPushTokenRoute = require('./api/register-push-token');
 
 // API routes
 app.get('/api/health', healthRoute);
@@ -25,6 +27,8 @@ app.post('/api/send-message', sendMessageRoute);
 app.post('/api/webhook', webhookHandlerRoute);
 app.post('/api/set-commands', setCommandsRoute);
 app.post('/api/update-command', updateCommandRoute);
+app.post('/api/expo-push', expoPushRoute);
+app.post('/api/register-push-token', registerPushTokenRoute);
 
 // Root route
 app.get('/', (req, res) => {
@@ -43,7 +47,9 @@ app.get('/', (req, res) => {
       sendMessage: 'POST /api/send-message',
       webhook: 'POST /api/webhook',
       setCommands: 'POST /api/set-commands',
-      updateCommand: 'POST /api/update-command'
+      updateCommand: 'POST /api/update-command',
+      expoPush: 'POST /api/expo-push',
+      registerPushToken: 'POST /api/register-push-token'
     },
     features: {
       subscriptionVerification: 'Verify user subscription to Telegram channel',

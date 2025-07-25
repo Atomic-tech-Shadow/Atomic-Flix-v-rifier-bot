@@ -182,11 +182,12 @@ async function sendPushNotificationToAllUsers(bot, chatId, userId, downloadUrl) 
     }
 
     // Rapport final
+    const sentCount = notificationResult.sent || notificationResult.notificationsSent || 0;
     const report = `✅ NOTIFICATIONS ENVOYÉES\n\n` +
                   `💬 Titre: ${pushMessage.title}\n` +
                   `📝 Message: ${pushMessage.body}\n` +
                   `🔗 Lien: ${downloadUrl}\n` +
-                  `📲 Notifications: ${notificationResult.sent || notificationResult.notificationsSent}\n` +
+                  `📲 Notifications: ${sentCount}\n` +
                   `${notificationResult.errors ? `❌ Erreurs: ${notificationResult.errors}\n` : ''}` +
                   `📅 ${new Date().toLocaleString('fr-FR')}`;
 
@@ -194,7 +195,7 @@ async function sendPushNotificationToAllUsers(bot, chatId, userId, downloadUrl) 
 
     return {
       success: true,
-      notificationsSent: notificationsSent,
+      notificationsSent: sentCount,
       report: report
     };
 
