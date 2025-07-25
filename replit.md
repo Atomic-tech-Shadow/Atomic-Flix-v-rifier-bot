@@ -64,10 +64,20 @@ Language: French (user communicates in French)
 
 ✓ Project migrated from Replit Agent to Replit environment (25/07/2025)
 - Configured proper Node.js workflow with port 5000
-- Installed all required dependencies (express, axios, canvas, node-telegram-bot-api)
+- Installed all required dependencies (express, axios, canvas, node-telegram-bot-api, pg)
 - Verified API endpoints functionality and error handling
 - Confirmed Telegram message delivery with successful test message
 - Migration completed successfully - all systems operational
+
+🔥 POSTGRES PUSH TOKENS SYSTEM IMPLEMENTED (25/07/2025)
+- Migrated from temporary memory storage to persistent PostgreSQL
+- Created `expo_push_tokens` table with full indexing for performance
+- Built ExpoPushTokenManager class with complete CRUD operations
+- Unlimited and free storage - no more token loss on server restart
+- Active tokens filtered by 30-day activity window
+- Auto-cleanup system for 90+ day inactive tokens
+- Real-time statistics with persistent user tracking
+- Backward compatibility maintained with existing API calls
 
 ✓ Added `/update` command for push notifications (25/07/2025)
 - Created new API endpoint `/api/update-command`
@@ -106,6 +116,7 @@ Language: French (user communicates in French)
 - **Telegram Bot Client** (`telegramBot.js`): Centralized bot instance management and API wrapper
 - **SVG Image Generator** (`svgImageGenerator.js`): Creates custom welcome images for new users
 - **Logo Converter** (`logoConverter.js`): Handles ATOMIC FLIX branding assets
+- **Database Manager** (`database.js`): PostgreSQL connection and ExpoPushTokenManager for persistent storage
 
 ### Configuration Files
 - **Vercel Config** (`vercel.json`): Deployment settings with function-specific timeouts
@@ -133,6 +144,7 @@ Language: French (user communicates in French)
 - **express**: Web framework for local development
 - **axios**: HTTP client for external API calls
 - **canvas**: Image generation capabilities for custom graphics
+- **pg**: PostgreSQL driver for persistent data storage
 
 ### Content Management
 - **Static Assets**: Logo and branding materials stored locally

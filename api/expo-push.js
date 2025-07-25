@@ -1,13 +1,12 @@
 // API pour gérer les notifications push Expo
+// Utilise PostgreSQL pour stockage persistant - Totalement gratuit et illimité
 
 const { getBotInstance } = require('../lib/telegramBot');
+const { ExpoPushTokenManager } = require('../lib/database');
 
 // Configuration Expo Push
 let EXPO_ACCESS_TOKEN = null;
 const EXPO_PUSH_URL = 'https://exp.host/--/api/v2/push/send';
-
-// Stockage temporaire des tokens push des utilisateurs
-const userPushTokens = new Map();
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request
@@ -45,7 +44,7 @@ module.exports = async (req, res) => {
       });
       
     } else if (action === 'register_user_token') {
-      // Enregistrer le token push d'un utilisateur
+      // Enregistrer le token push d'un utilisateur dans PostgreSQL
       if (!userId || !userPushToken) {
         return res.status(400).json({
           success: false,
@@ -61,14 +60,16 @@ module.exports = async (req, res) => {
         });
       }
       
-      userPushTokens.set(userId, userPushToken);
-      console.log(`✅ Registered push token for user ${userId}`);
+      const tokenData = await ExpoPushTokenManager.registerToken(userId, userPushToken, data || {});
+      console.log(`✅ Registered push token for user ${userId} in PostgreSQL`);
       
       return res.status(200).json({
         success: true,
-        message: 'User push token registered successfully',
+        message: 'User push token registered successfully in PostgreSQL',
         userId: userId,
-        registered: true
+        registered: true,
+        persistent: true,
+        timestamp: tokenData.registered_at
       });
       
     } else if (action === 'send_push') {
@@ -84,13 +85,18 @@ module.exports = async (req, res) => {
       return res.status(200).json(result);
       
     } else if (action === 'get_stats') {
-      // Statistiques du système push
+      // Statistiques du système push depuis PostgreSQL
+      const dbStats = await ExpoPushTokenManager.getStats();
+      
       return res.status(200).json({
         success: true,
         stats: {
           expoTokenConfigured: !!EXPO_ACCESS_TOKEN,
-          registeredUsers: userPushTokens.size,
-          registeredTokens: Array.from(userPushTokens.keys())
+          registeredUsers: dbStats.totalUsers,
+          activeUsers: dbStats.activeUsers,
+          storage: 'PostgreSQL - Unlimited & Free',
+          persistent: true,
+          recentRegistrations: dbStats.recentRegistrations
         }
       });
     }
@@ -116,9 +122,8 @@ async function sendExpoPushNotification(message, data = {}) {
       throw new Error('Expo access token not configured');
     }
     
-    // Obtenir les tokens actifs depuis l'API d'enregistrement
-    const { getActivePushTokens } = require('./register-push-token');
-    const tokens = getActivePushTokens();
+    // Obtenir les tokens actifs depuis PostgreSQL
+    const tokens = await ExpoPushTokenManager.getActiveTokens();
     
     if (tokens.length === 0) {
       return {
@@ -185,5 +190,13 @@ async function sendExpoPushNotification(message, data = {}) {
 
 // Exporter les fonctions utilitaires
 module.exports.sendExpoPushNotification = sendExpoPushNotification;
-module.exports.getUserPushTokens = () => Array.from(userPushTokens.entries());
+module.exports.getUserPushTokens = async () => {
+  try {
+    const stats = await ExpoPushTokenManager.getStats();
+    return stats.recentRegistrations.map(reg => [reg.user_id, reg]);
+  } catch (error) {
+    console.error('Error getting user push tokens:', error);
+    return [];
+  }
+};
 module.exports.isExpoConfigured = () => !!EXPO_ACCESS_TOKEN;

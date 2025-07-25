@@ -1,9 +1,8 @@
 // API pour enregistrer les tokens push des utilisateurs de l'app mobile
+// Stockage PostgreSQL persistent - Totalement gratuit et illimité
 
 const { getBotInstance } = require('../lib/telegramBot');
-
-// Stockage persistant des tokens (en production, utiliser une vraie DB)
-const userPushTokens = new Map();
+const { ExpoPushTokenManager } = require('../lib/database');
 
 
 
@@ -43,24 +42,18 @@ module.exports = async (req, res) => {
         });
       }
       
-      // Stocker le token avec informations supplémentaires
-      const tokenData = {
-        pushToken: pushToken,
-        deviceInfo: deviceInfo || {},
-        registeredAt: new Date().toISOString(),
-        lastActive: new Date().toISOString()
-      };
-      
-      userPushTokens.set(userId.toString(), tokenData);
+      // Stocker le token dans PostgreSQL
+      const tokenData = await ExpoPushTokenManager.registerToken(userId, pushToken, deviceInfo || {});
       
       console.log(`✅ Push token registered for user ${userId}:`, pushToken.substring(0, 30) + '...');
       
       return res.status(200).json({
         success: true,
-        message: 'Push token registered successfully',
+        message: 'Push token registered successfully in PostgreSQL',
         userId: userId,
         registered: true,
-        timestamp: tokenData.registeredAt
+        timestamp: tokenData.registered_at,
+        persistent: true
       });
       
     } else if (action === 'unregister') {
@@ -72,13 +65,14 @@ module.exports = async (req, res) => {
         });
       }
       
-      const deleted = userPushTokens.delete(userId.toString());
+      const result = await ExpoPushTokenManager.unregisterToken(userId);
       
       return res.status(200).json({
         success: true,
-        message: deleted ? 'Push token unregistered successfully' : 'No token found for user',
+        message: result ? 'Push token unregistered successfully' : 'No token found for user',
         userId: userId,
-        unregistered: deleted
+        unregistered: !!result,
+        persistent: true
       });
       
     } else if (action === 'update_activity') {
@@ -90,37 +84,27 @@ module.exports = async (req, res) => {
         });
       }
       
-      const tokenData = userPushTokens.get(userId.toString());
-      if (tokenData) {
-        tokenData.lastActive = new Date().toISOString();
-        userPushTokens.set(userId.toString(), tokenData);
-      }
+      const result = await ExpoPushTokenManager.updateLastActivity(userId);
       
       return res.status(200).json({
         success: true,
-        message: 'Activity updated',
-        found: !!tokenData
+        message: 'Activity updated in PostgreSQL',
+        found: !!result,
+        persistent: true
       });
       
     } else if (action === 'get_stats') {
-      // Statistiques des tokens enregistrés
-      const tokens = Array.from(userPushTokens.entries());
-      const activeTokens = tokens.filter(([_, data]) => {
-        const lastActive = new Date(data.lastActive);
-        const daysSinceActive = (Date.now() - lastActive.getTime()) / (1000 * 60 * 60 * 24);
-        return daysSinceActive <= 30; // Actif dans les 30 derniers jours
-      });
+      // Statistiques des tokens enregistrés depuis PostgreSQL
+      const stats = await ExpoPushTokenManager.getStats();
       
       return res.status(200).json({
         success: true,
         stats: {
-          totalUsers: userPushTokens.size,
-          activeUsers: activeTokens.length,
-          registrationDates: tokens.map(([userId, data]) => ({
-            userId,
-            registeredAt: data.registeredAt,
-            lastActive: data.lastActive
-          }))
+          totalUsers: stats.totalUsers,
+          activeUsers: stats.activeUsers,
+          recentRegistrations: stats.recentRegistrations,
+          storage: 'PostgreSQL - Unlimited & Free',
+          persistent: true
         }
       });
     }
@@ -139,18 +123,24 @@ module.exports = async (req, res) => {
   }
 };
 
-// Fonction utilitaire pour obtenir tous les tokens actifs
-function getActivePushTokens() {
-  const tokens = Array.from(userPushTokens.values());
-  return tokens
-    .filter(data => {
-      const lastActive = new Date(data.lastActive);
-      const daysSinceActive = (Date.now() - lastActive.getTime()) / (1000 * 60 * 60 * 24);
-      return daysSinceActive <= 30; // Actif dans les 30 derniers jours
-    })
-    .map(data => data.pushToken);
+// Fonction utilitaire pour obtenir tous les tokens actifs depuis PostgreSQL
+async function getActivePushTokens() {
+  try {
+    return await ExpoPushTokenManager.getActiveTokens();
+  } catch (error) {
+    console.error('Error getting active push tokens:', error);
+    return [];
+  }
 }
 
 // Exporter les fonctions utilitaires
 module.exports.getActivePushTokens = getActivePushTokens;
-module.exports.getUserCount = () => userPushTokens.size;
+module.exports.getUserCount = async () => {
+  try {
+    const stats = await ExpoPushTokenManager.getStats();
+    return stats.totalUsers;
+  } catch (error) {
+    console.error('Error getting user count:', error);
+    return 0;
+  }
+};
