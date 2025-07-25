@@ -16,6 +16,12 @@ Preferred communication style: Simple, everyday language.
 - Deleted unauthorized webhook and reset bot commands
 - Bot security fully restored - normal operation confirmed
 
+✅ DEPLOYMENT PREPARATION (25/07/2025)
+- Added /update command to bot commands list
+- Updated vercel.json to include api/update-command.js
+- Webhook reconfigured to point back to Vercel production
+- Ready for Vercel redeployment with complete functionality
+
 ✓ Project migrated from Replit Agent to Replit environment (25/07/2025)
 - Configured proper Node.js workflow with port 5000
 - Installed all required dependencies (express, axios, canvas, node-telegram-bot-api)
