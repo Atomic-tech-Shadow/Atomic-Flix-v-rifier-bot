@@ -47,13 +47,15 @@ module.exports = async (req, res) => {
       
       console.log(`✅ Push token registered for user ${userId}:`, pushToken.substring(0, 30) + '...');
       
+      const storageEnv = ExpoPushTokenManager.getStorageEnvironment();
+      
       return res.status(200).json({
         success: true,
-        message: 'Push token registered successfully in PostgreSQL',
+        message: `Push token registered successfully in ${storageEnv.type}`,
         userId: userId,
         registered: true,
-        timestamp: tokenData.registered_at,
-        persistent: true
+        timestamp: tokenData.registered_at || tokenData.registeredAt,
+        storage: storageEnv
       });
       
     } else if (action === 'unregister') {
@@ -67,12 +69,14 @@ module.exports = async (req, res) => {
       
       const result = await ExpoPushTokenManager.unregisterToken(userId);
       
+      const storageEnv = ExpoPushTokenManager.getStorageEnvironment();
+      
       return res.status(200).json({
         success: true,
         message: result ? 'Push token unregistered successfully' : 'No token found for user',
         userId: userId,
         unregistered: !!result,
-        persistent: true
+        storage: storageEnv
       });
       
     } else if (action === 'update_activity') {
@@ -86,16 +90,20 @@ module.exports = async (req, res) => {
       
       const result = await ExpoPushTokenManager.updateLastActivity(userId);
       
+      const storageEnv = ExpoPushTokenManager.getStorageEnvironment();
+      
       return res.status(200).json({
         success: true,
-        message: 'Activity updated in PostgreSQL',
+        message: `Activity updated in ${storageEnv.type}`,
         found: !!result,
-        persistent: true
+        storage: storageEnv
       });
       
     } else if (action === 'get_stats') {
       // Statistiques des tokens enregistrés depuis PostgreSQL
       const stats = await ExpoPushTokenManager.getStats();
+      
+      const storageEnv = ExpoPushTokenManager.getStorageEnvironment();
       
       return res.status(200).json({
         success: true,
@@ -103,8 +111,7 @@ module.exports = async (req, res) => {
           totalUsers: stats.totalUsers,
           activeUsers: stats.activeUsers,
           recentRegistrations: stats.recentRegistrations,
-          storage: 'PostgreSQL - Unlimited & Free',
-          persistent: true
+          storage: storageEnv
         }
       });
     }
