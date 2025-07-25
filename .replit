@@ -21,7 +21,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm install node-telegram-bot-api && npm start"
+args = "node server.js"
 waitForPort = 5000
 
 [[ports]]
