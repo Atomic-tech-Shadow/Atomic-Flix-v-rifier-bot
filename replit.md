@@ -7,6 +7,7 @@ This is a Telegram bot backend API for ATOMIC FLIX, an anime streaming platform.
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Language: French (user communicates in French)
 
 ## Recent Changes
 
