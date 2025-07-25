@@ -10,6 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+✓ Project migrated from Replit Agent to Replit environment (25/07/2025)
+- Configured proper Node.js workflow with port 5000
+- Installed all required dependencies (express, axios, canvas, node-telegram-bot-api)
+- Verified API endpoints functionality and error handling
+- Maintained client/server separation for security
+
 ✓ Added `/update` command for push notifications (25/07/2025)
 - Created new API endpoint `/api/update-command`
 - Integrated with webhook handler for button callbacks
