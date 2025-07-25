@@ -119,7 +119,7 @@ async function handleUpdateCommand(bot, chatId, userId, downloadUrl) {
     await bot.sendMessage(chatId, confirmMessage, {
       reply_markup: {
         inline_keyboard: [[
-          { text: '✅ Envoyer notification', callback_data: `send_push:${encodeURIComponent(downloadUrl)}` },
+          { text: '✅ Envoyer notification', callback_data: 'confirm_send_push' },
           { text: '❌ Annuler', callback_data: 'cancel_update' }
         ]]
       }

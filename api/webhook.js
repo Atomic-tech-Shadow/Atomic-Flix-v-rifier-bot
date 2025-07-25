@@ -493,6 +493,38 @@ module.exports = async (req, res) => {
             }
           );
         }
+      } else if (callbackData === 'confirm_send_push') {
+        // Gérer la confirmation d'envoi de notifications push
+        const updateCommandHandler = require('./update-command');
+        const updateRequest = {
+          method: 'POST',
+          body: {
+            chatId: chatId,
+            userId: userId,
+            action: 'send_push'
+          }
+        };
+        
+        const updateResponse = {
+          setHeader: () => {},
+          status: (code) => ({
+            json: (data) => {
+              console.log('Push notification response:', data);
+              return data;
+            }
+          })
+        };
+        
+        await updateCommandHandler(updateRequest, updateResponse);
+        
+      } else if (callbackData === 'cancel_update') {
+        await bot.editMessageText(
+          '❌ Envoi de notification annulé.',
+          {
+            chat_id: chatId,
+            message_id: update.callback_query.message.message_id
+          }
+        );
       } else if (callbackData === 'welcome_anime') {
         await bot.editMessageText(
           `🍿 Bienvenue dans l'univers Anime ATOMIC FLIX !\n\n` +
