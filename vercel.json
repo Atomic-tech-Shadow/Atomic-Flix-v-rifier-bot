@@ -28,6 +28,9 @@
     "api/check-messages.js": {
       "maxDuration": 10
     },
+    "api/check-messages/[appId].js": {
+      "maxDuration": 10
+    },
     "api/security-middleware.js": {
       "maxDuration": 10
     },

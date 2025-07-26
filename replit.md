@@ -95,6 +95,7 @@ Language: French (user communicates in French)
 - Migrated message storage from memory to file-based system (/tmp/messages) for serverless persistence
 - Fixed endpoint testing - messages now properly persist between API calls on Vercel
 - Fixed check-messages endpoint for Vercel compatibility (URL parameter parsing)
+- Added dynamic route api/check-messages/[appId].js for better Vercel URL routing support
 
 ## System Architecture
 
