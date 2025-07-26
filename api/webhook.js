@@ -102,10 +102,9 @@ module.exports = async (req, res) => {
             }
           }
         );
-      } else if (text.match(/^\/message\s+(.+)/)) {
+      } else if (text.startsWith('/message ')) {
         // Commande pour envoyer message à toutes les apps
         const input = text.replace('/message ', '');
-        const parts = input.split('"').filter(part => part.trim());
         
         // Vérifier si c'est l'admin (remplace par ton ID Telegram)
         const ADMIN_USER_ID = 6968736907; // ID admin principal
@@ -114,14 +113,22 @@ module.exports = async (req, res) => {
           return res.status(200).json({ success: true });
         }
         
-        if (parts.length < 2) {
-          await bot.sendMessage(chatId, '❌ Format: /message "Titre" "Message" [URL]');
+        // Parsing amélioré pour les guillemets
+        const regex = /"([^"]+)"\s*"([^"]+)"(?:\s+"([^"]+)"|\s+(\S+))?/;
+        const matches = input.match(regex);
+        
+        if (!matches) {
+          await bot.sendMessage(chatId, 
+            '❌ Format: /message "Titre" "Message" [URL]\n\n' +
+            'Exemple:\n' +
+            '/message "Nouvelle version" "Version 2.9.1 disponible !" "https://apkpure.com/atomic-flix"'
+          );
           return res.status(200).json({ success: true });
         }
         
-        const title = parts[0].trim();
-        const message = parts[1].trim();
-        const downloadUrl = parts[2] ? parts[2].trim() : null;
+        const title = matches[1];
+        const message = matches[2];
+        const downloadUrl = matches[3] || matches[4] || null;
         
         try {
           // Envoyer à l'API serveur (utiliser axios)
