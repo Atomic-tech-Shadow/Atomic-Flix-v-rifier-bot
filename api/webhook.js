@@ -124,19 +124,30 @@ module.exports = async (req, res) => {
         const downloadUrl = parts[2] ? parts[2].trim() : null;
         
         try {
-          // Envoyer à l'API serveur (utiliser axios)
-          const axios = require('axios');
-          const API_URL = process.env.API_URL || 'http://localhost:5000';
+          // Appeler directement la fonction send-app-message au lieu de faire un appel HTTP
+          const sendAppMessage = require('./send-app-message');
           
-          await axios.post(`${API_URL}/api/send-app-message`, {
-            appId: 'atomic_flix_mobile_v1',
-            message: {
-              title,
-              message,
-              downloadUrl,
-              buttonText: downloadUrl ? '📥 Télécharger' : 'OK'
+          const mockReq = {
+            method: 'POST',
+            body: {
+              appId: 'atomic_flix_mobile_v1',
+              message: {
+                title,
+                message,
+                downloadUrl,
+                buttonText: downloadUrl ? '📥 Télécharger' : 'OK'
+              }
             }
-          });
+          };
+          
+          const mockRes = {
+            setHeader: () => {},
+            status: (code) => ({
+              json: (data) => data
+            })
+          };
+          
+          await sendAppMessage(mockReq, mockRes);
           
           await bot.sendMessage(chatId, `✅ Message envoyé à toutes les apps ATOMIC FLIX\n\n📝 Titre: ${title}\n💬 Message: ${message}${downloadUrl ? `\n🔗 Lien: ${downloadUrl}` : ''}`);
           
