@@ -88,10 +88,8 @@ Language: French (user communicates in French)
 - Removed push notification dependencies for simpler architecture
 - Admin-only access maintained with permission checks
 - Fixed Telegram bot webhook to handle new /message command format
-- Improved regex parsing for quoted parameters in /message command
 - Implemented shared message storage with lib/messageStorage.js
 - System tested and fully operational with atomic_flix_mobile_v1 app ID
-- Bot commands updated to include /message in Telegram menu
 
 ## System Architecture
 
