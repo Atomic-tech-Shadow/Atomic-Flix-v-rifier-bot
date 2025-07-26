@@ -1,4 +1,4 @@
-const messageStorage = require('../../lib/simpleStorage');
+const messageStorage = require('../../lib/postgresStorage');
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request

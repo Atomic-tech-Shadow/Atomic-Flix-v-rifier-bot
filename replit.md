@@ -26,9 +26,10 @@ Language: French (user communicates in French)
 - Nettoyé les références aux tokens Expo dans server.js et webhook.js
 - Supprimé la table PostgreSQL expo_push_tokens (plus nécessaire)
 - Corrigé les erreurs de syntaxe dans webhook.js après nettoyage
-- Migré vers système simple (simpleStorage.js) pour compatibilité Vercel optimale
-- Supprimé stockage persistent - traitement immédiat des messages sans complexité
-- Système maintenant focalisé sur traitement direct des messages via bot Telegram
+- Implémenté PostgreSQL robuste avec retry automatique et logging détaillé
+- Corrigé erreur initTable et testé avec succès - messages persistent correctement
+- Système de stockage fonctionnel garantissant la réception des messages par les apps
+- Table app_messages créée automatiquement avec système de retry pour Vercel
 - Architecture simplifiée et plus maintenable sans dépendances push
 
 ✅ DEMO MODE CLEANUP COMPLETED (25/07/2025)
