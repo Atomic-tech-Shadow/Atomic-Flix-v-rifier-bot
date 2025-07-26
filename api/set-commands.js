@@ -48,8 +48,8 @@ module.exports = async (req, res) => {
         description: '❓ Afficher l\'aide et les commandes'
       },
       {
-        command: 'update',
-        description: '📱 Envoyer une notification de mise à jour'
+        command: 'message',
+        description: '📱 Envoyer un message aux apps'
       }
     ];
     
