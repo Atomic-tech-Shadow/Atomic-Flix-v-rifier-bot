@@ -1,5 +1,4 @@
 const { getBotInstance } = require('../lib/telegramBot');
-const { securityMiddleware } = require('./security-middleware');
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request
@@ -14,19 +13,6 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  
-  // 🛡️ SECURITY CHECK - Apply security middleware
-  try {
-    await new Promise((resolve, reject) => {
-      securityMiddleware(req, res, (error) => {
-        if (error) reject(error);
-        else resolve();
-      });
-    });
-  } catch (securityError) {
-    console.log('🚨 SECURITY BLOCK:', securityError.message);
-    return; // Request already handled by security middleware
-  }
   
   try {
     console.log('Webhook called with method:', req.method);

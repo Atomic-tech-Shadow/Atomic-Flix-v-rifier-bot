@@ -16,10 +16,10 @@ const sendMessageRoute = require('./api/send-message');
 const webhookHandlerRoute = require('./api/webhook');
 const setCommandsRoute = require('./api/set-commands');
 // Supprimé - remplacé par le système de messages simple
-const expoPushRoute = require('./api/expo-push');
-const registerPushTokenRoute = require('./api/register-push-token');
+// const expoPushRoute = require('./api/expo-push'); // Removed
+// const registerPushTokenRoute = require('./api/register-push-token'); // Removed
 const sendAppMessageRoute = require('./api/send-app-message');
-const checkMessagesRoute = require('./api/check-messages');
+// const checkMessagesRoute = require('./api/check-messages'); // Removed - using dynamic route
 
 // API routes
 app.get('/api/health', healthRoute);
@@ -29,10 +29,10 @@ app.post('/api/send-message', sendMessageRoute);
 app.post('/api/webhook', webhookHandlerRoute);
 app.post('/api/set-commands', setCommandsRoute);
 // Supprimé - remplacé par le système de messages simple
-app.post('/api/expo-push', expoPushRoute);
-app.post('/api/register-push-token', registerPushTokenRoute);
+// app.post('/api/expo-push', expoPushRoute); // Removed
+// app.post('/api/register-push-token', registerPushTokenRoute); // Removed
 app.post('/api/send-app-message', sendAppMessageRoute);
-app.get('/api/check-messages/:appId', checkMessagesRoute);
+// app.get('/api/check-messages/:appId', checkMessagesRoute); // Using dynamic route instead
 
 // Root route
 app.get('/', (req, res) => {
