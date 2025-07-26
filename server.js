@@ -18,6 +18,8 @@ const setCommandsRoute = require('./api/set-commands');
 const updateCommandRoute = require('./api/update-command');
 const expoPushRoute = require('./api/expo-push');
 const registerPushTokenRoute = require('./api/register-push-token');
+const sendAppMessageRoute = require('./api/send-app-message');
+const checkMessagesRoute = require('./api/check-messages');
 
 // API routes
 app.get('/api/health', healthRoute);
@@ -29,6 +31,8 @@ app.post('/api/set-commands', setCommandsRoute);
 app.post('/api/update-command', updateCommandRoute);
 app.post('/api/expo-push', expoPushRoute);
 app.post('/api/register-push-token', registerPushTokenRoute);
+app.post('/api/send-app-message', sendAppMessageRoute);
+app.get('/api/check-messages/:appId', checkMessagesRoute);
 
 // Root route
 app.get('/', (req, res) => {
@@ -49,7 +53,9 @@ app.get('/', (req, res) => {
       setCommands: 'POST /api/set-commands',
       updateCommand: 'POST /api/update-command',
       expoPush: 'POST /api/expo-push',
-      registerPushToken: 'POST /api/register-push-token'
+      registerPushToken: 'POST /api/register-push-token',
+      sendAppMessage: 'POST /api/send-app-message',
+      checkMessages: 'GET /api/check-messages/:appId'
     },
     features: {
       subscriptionVerification: 'Verify user subscription to Telegram channel',
@@ -66,7 +72,9 @@ app.get('/', (req, res) => {
       sendMessage: 'Send messages to users with optional inline keyboards',
       webhook: 'Handle incoming webhook updates from Telegram',
       setCommands: 'Configure bot commands in Telegram',
-      updateCommand: 'Admin command to send push notifications for app updates'
+      updateCommand: 'Admin command to send messages to mobile apps',
+      sendAppMessage: 'Send messages to mobile app via message system',
+      checkMessages: 'Check pending messages for mobile app'
     }
   });
 });

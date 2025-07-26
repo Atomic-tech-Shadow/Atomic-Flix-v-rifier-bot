@@ -102,24 +102,25 @@ module.exports = async (req, res) => {
             }
           }
         );
-      } else if (text.startsWith('/update ')) {
-        // Nouvelle commande /update
-        const downloadUrl = text.replace('/update ', '').trim();
+      } else if (text.match(/^\/message\s+"([^"]+)"\s+"([^"]+)"(\s+"([^"]+)")?/)) {
+        // Nouvelle commande /message "Titre" "Message" [URL]
+        const matches = text.match(/^\/message\s+"([^"]+)"\s+"([^"]+)"(\s+"([^"]+)")?/);
+        const title = matches[1];
+        const message = matches[2];
+        const downloadUrl = matches[4] || null;
         
-        if (!downloadUrl) {
-          await bot.sendMessage(chatId, '❌ Veuillez fournir une URL de téléchargement.\n\nUsage: /update https://apkpure.com/fr/atomic-flix/...');
-          return res.status(200).json({ success: true, message: 'Invalid update command format' });
-        }
+        console.log(`Command /message from user ${userId}: title="${title}", message="${message}", url="${downloadUrl}"`);
         
-        // Appel de la fonction de gestion de la commande update
+        // Appel de la fonction de gestion de la commande message
         const updateCommandHandler = require('./update-command');
         const updateRequest = {
           method: 'POST',
           body: {
             chatId: chatId,
             userId: userId,
-            downloadUrl: downloadUrl,
-            action: 'initiate_update'
+            title: title,
+            message: message,
+            downloadUrl: downloadUrl
           }
         };
         
@@ -127,13 +128,24 @@ module.exports = async (req, res) => {
           setHeader: () => {},
           status: (code) => ({
             json: (data) => {
-              console.log('Update command response:', data);
+              console.log('Message command response:', data);
               return data;
             }
           })
         };
         
         await updateCommandHandler(updateRequest, updateResponse);
+      } else if (text.startsWith('/update')) {
+        await bot.sendMessage(chatId, 
+          `🤖 *ATOMIC FLIX Bot*\n\n` +
+          `Commandes disponibles:\n\n` +
+          `/message "Titre" "Message" [URL]\n` +
+          `   Envoie un message à toutes les apps\n\n` +
+          `Exemple:\n` +
+          `/message "Nouvelle version" "Version 2.9.1 disponible !" "https://apkpure.com/atomic-flix"\n\n` +
+          `/help - Affiche cette aide`,
+          { parse_mode: 'Markdown' }
+        );
       } else if (text.startsWith('/verify')) {
         // Check subscription status
         const { verifySubscription } = require('../lib/telegramBot');

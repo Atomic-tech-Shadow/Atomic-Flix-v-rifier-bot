@@ -79,11 +79,14 @@ Language: French (user communicates in French)
 - Real-time statistics with persistent user tracking
 - Backward compatibility maintained with existing API calls
 
-✓ Added `/update` command for push notifications (25/07/2025)
-- Created new API endpoint `/api/update-command`
-- Integrated with webhook handler for button callbacks
-- Admin-only functionality with APKPure URL validation
-- Simulated push notification system ready for production integration
+🔄 SYSTEM SIMPLIFICATION COMPLETED (26/07/2025)
+- Replaced complex /update command with simple /message system
+- New `/message "Title" "Message" [URL]` command format
+- Created message storage system with 24h expiration
+- Added /api/send-app-message and /api/check-messages/:appId endpoints
+- Mobile app integration via direct message polling
+- Removed push notification dependencies for simpler architecture
+- Admin-only access maintained with permission checks
 
 ## System Architecture
 
@@ -110,13 +113,16 @@ Language: French (user communicates in French)
 - **Command Management** (`set-commands.js`): Configures bot commands in Telegram
 
 
-- **Update Command** (`update-command.js`): Admin-only command to send push notifications for app updates
+- **Update Command** (`update-command.js`): Admin-only command to send messages to mobile apps
+- **App Message System** (`send-app-message.js`): Send messages to mobile apps via storage system
+- **Message Check** (`check-messages.js`): Mobile app endpoint to retrieve pending messages
 
 ### Core Library (`/lib/`)
 - **Telegram Bot Client** (`telegramBot.js`): Centralized bot instance management and API wrapper
 - **SVG Image Generator** (`svgImageGenerator.js`): Creates custom welcome images for new users
 - **Logo Converter** (`logoConverter.js`): Handles ATOMIC FLIX branding assets
 - **Database Manager** (`database.js`): PostgreSQL connection and ExpoPushTokenManager for persistent storage
+- **Message Storage** (`messageStorage.js`): In-memory message storage with 24h expiration for app communication
 
 ### Configuration Files
 - **Vercel Config** (`vercel.json`): Deployment settings with function-specific timeouts
