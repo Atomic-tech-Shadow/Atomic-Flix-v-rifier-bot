@@ -1,4 +1,4 @@
-const messageStorage = require('../../lib/memoryStorage');
+const messageStorage = require('../../lib/postgresStorage');
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request
@@ -26,11 +26,11 @@ module.exports = async (req, res) => {
     }
     
     // Récupérer les messages valides
-    const validMessages = messageStorage.getValidMessages(appId);
+    const validMessages = await messageStorage.getValidMessages(appId);
     
     // Nettoyer après envoi si il y a des messages
     if (validMessages.length > 0) {
-      messageStorage.clearMessages(appId);
+      await messageStorage.clearMessages(appId);
     }
     
     console.log(`📱 App ${appId} a vérifié les messages: ${validMessages.length} trouvés`);

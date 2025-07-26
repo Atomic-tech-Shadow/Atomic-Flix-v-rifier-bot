@@ -1,4 +1,4 @@
-const messageStorage = require('../lib/memoryStorage');
+const messageStorage = require('../lib/postgresStorage');
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
     }
     
     // Ajouter le message via le système de stockage partagé
-    const savedMessage = messageStorage.addMessage(appId, message);
+    const savedMessage = await messageStorage.addMessage(appId, message);
     
     return res.status(200).json({ 
       success: true,
