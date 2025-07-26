@@ -116,7 +116,6 @@ Language: French (user communicates in French)
 - **Command Management** (`set-commands.js`): Configures bot commands in Telegram
 
 
-- **Update Command** (`update-command.js`): Admin-only command to send messages to mobile apps
 - **App Message System** (`send-app-message.js`): Send messages to mobile apps via storage system
 - **Message Check** (`check-messages.js`): Mobile app endpoint to retrieve pending messages
 
