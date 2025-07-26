@@ -62,6 +62,7 @@ module.exports = async (req, res) => {
       const userId = update.message.from.id;
       
       console.log(`Message from user ${userId}: ${text}`);
+      console.log(`User details:`, update.message.from);
       
       // Handle commands
       if (text.startsWith('/start')) {
@@ -96,7 +97,7 @@ module.exports = async (req, res) => {
         // Vérifier si c'est l'admin (remplace par ton ID Telegram)
         const ADMIN_USER_ID = 6968736907; // ID admin principal
         if (userId !== ADMIN_USER_ID) {
-          await bot.sendMessage(chatId, '❌ Accès refusé');
+          await bot.sendMessage(chatId, `❌ Accès refusé. Votre ID: ${userId}, Admin ID: ${ADMIN_USER_ID}`);
           return res.status(200).json({ success: true });
         }
         
