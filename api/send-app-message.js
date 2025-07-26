@@ -1,4 +1,4 @@
-const messageStorage = require('../lib/postgresStorage');
+const messageStorage = require('../lib/hybridStorage');
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request

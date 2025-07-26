@@ -111,8 +111,8 @@ module.exports = async (req, res) => {
         const downloadUrl = parts[2] ? parts[2].trim() : null;
         
         try {
-          // Utiliser PostgreSQL pour stockage persistent sur Vercel
-          const messageStorage = require('../lib/postgresStorage');
+          // Utiliser système hybride (PostgreSQL ou mémoire)
+          const messageStorage = require('../lib/hybridStorage');
           
           const messageData = {
             title,
