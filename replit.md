@@ -92,6 +92,8 @@ Language: French (user communicates in French)
 - System tested and fully operational with atomic_flix_mobile_v1 app ID
 - Fixed webhook to call send-app-message function directly instead of HTTP requests
 - Command /message successfully tested on production with real message delivery
+- Migrated message storage from memory to file-based system (/tmp/messages) for serverless persistence
+- Fixed endpoint testing - messages now properly persist between API calls on Vercel
 
 ## System Architecture
 
