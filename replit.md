@@ -21,6 +21,14 @@ Language: French (user communicates in French)
 - All critical endpoints tested and confirmed functional
 - Project ready for development and deployment
 
+✅ SYSTÈME SIMPLIFIÉ - SUPPRESSION NOTIFICATIONS PUSH (26/07/2025)
+- Supprimé tous les fichiers liés aux notifications push (database.js, storage-fallback.js, tempStorage.js)
+- Nettoyé les références aux tokens Expo dans server.js et webhook.js
+- Supprimé la table PostgreSQL expo_push_tokens (plus nécessaire)
+- Corrigé les erreurs de syntaxe dans webhook.js après nettoyage
+- Système maintenant focalisé uniquement sur les messages d'app avec stockage fichier
+- Architecture simplifiée et plus maintenable sans dépendances push
+
 ✅ DEMO MODE CLEANUP COMPLETED (25/07/2025)
 - Removed all demo configurations from push notifications
 - Deleted simulated users and demo tokens from register-push-token.js

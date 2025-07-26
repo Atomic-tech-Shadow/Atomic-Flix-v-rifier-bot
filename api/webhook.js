@@ -304,54 +304,6 @@ module.exports = async (req, res) => {
             }
           );
         }
-      } else if (callbackData.startsWith('push_')) {
-        // Gérer la confirmation d'envoi de notifications push
-        const urlId = callbackData.replace('push_', '');
-        const { getStoredUrl } = require('../lib/tempStorage');
-        const downloadUrl = getStoredUrl(urlId);
-        
-        if (!downloadUrl) {
-          await bot.editMessageText(
-            '❌ Session expirée. Veuillez relancer la commande /update.',
-            {
-              chat_id: chatId,
-              message_id: update.callback_query.message.message_id
-            }
-          );
-          return;
-        }
-        
-        const updateCommandHandler = require('./update-command');
-        const updateRequest = {
-          method: 'POST',
-          body: {
-            chatId: chatId,
-            userId: userId,
-            downloadUrl: downloadUrl,
-            action: 'send_push'
-          }
-        };
-        
-        const updateResponse = {
-          setHeader: () => {},
-          status: (code) => ({
-            json: (data) => {
-              console.log('Push notification response:', data);
-              return data;
-            }
-          })
-        };
-        
-        await updateCommandHandler(updateRequest, updateResponse);
-        
-      } else if (callbackData === 'cancel_update') {
-        await bot.editMessageText(
-          '❌ Envoi de notification annulé.',
-          {
-            chat_id: chatId,
-            message_id: update.callback_query.message.message_id
-          }
-        );
       } else if (callbackData === 'welcome_anime') {
         await bot.editMessageText(
           `🍿 Bienvenue dans l'univers Anime ATOMIC FLIX !\n\n` +
@@ -430,14 +382,6 @@ module.exports = async (req, res) => {
             }
           }
         );
-
-        
-      } else if (callbackData === 'cancel_update') {
-        // Gestion du callback pour annuler l'envoi
-        await bot.editMessageText('❌ Envoi annulé.', {
-          chat_id: chatId,
-          message_id: update.callback_query.message.message_id
-        });
       }
       
       // Answer callback query to stop loading indicator

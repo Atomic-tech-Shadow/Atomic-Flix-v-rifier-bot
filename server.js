@@ -51,9 +51,7 @@ app.get('/', (req, res) => {
       sendMessage: 'POST /api/send-message',
       webhook: 'POST /api/webhook',
       setCommands: 'POST /api/set-commands',
-      // updateCommand: 'POST /api/update-command', // Supprimé
-      expoPush: 'POST /api/expo-push',
-      registerPushToken: 'POST /api/register-push-token',
+
       sendAppMessage: 'POST /api/send-app-message',
       checkMessages: 'GET /api/check-messages/:appId'
     },
@@ -62,7 +60,7 @@ app.get('/', (req, res) => {
       inlineKeyboards: 'Interactive buttons for better user experience',
       webhookSupport: 'Real-time message handling',
       commandManagement: 'Bot command configuration',
-      messageDelivery: 'Send messages to users'
+      appMessageSystem: 'Send messages to mobile apps via storage system'
     },
     documentation: {
       health: 'Check bot status and configuration',
