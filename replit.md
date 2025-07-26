@@ -26,7 +26,8 @@ Language: French (user communicates in French)
 - Nettoyé les références aux tokens Expo dans server.js et webhook.js
 - Supprimé la table PostgreSQL expo_push_tokens (plus nécessaire)
 - Corrigé les erreurs de syntaxe dans webhook.js après nettoyage
-- Système maintenant focalisé uniquement sur les messages d'app avec stockage fichier
+- Migré du stockage fichier vers stockage mémoire (memoryStorage.js) pour compatibilité Vercel
+- Système maintenant focalisé uniquement sur les messages d'app avec stockage mémoire
 - Architecture simplifiée et plus maintenable sans dépendances push
 
 ✅ DEMO MODE CLEANUP COMPLETED (25/07/2025)

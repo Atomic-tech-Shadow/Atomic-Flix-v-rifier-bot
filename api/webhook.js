@@ -111,8 +111,8 @@ module.exports = async (req, res) => {
         const downloadUrl = parts[2] ? parts[2].trim() : null;
         
         try {
-          // Utiliser directement le système de stockage de messages
-          const messageStorage = require('../lib/messageStorage');
+          // Utiliser le stockage en mémoire pour Vercel
+          const messageStorage = require('../lib/memoryStorage');
           
           const messageData = {
             title,
@@ -122,6 +122,7 @@ module.exports = async (req, res) => {
           };
           
           const savedMessage = messageStorage.addMessage('atomic_flix_mobile_v1', messageData);
+          console.log('Message sauvegardé:', savedMessage);
           
           await bot.sendMessage(chatId, `✅ Message envoyé à toutes les apps ATOMIC FLIX\n\n📝 Titre: ${title}\n💬 Message: ${message}${downloadUrl ? `\n🔗 Lien: ${downloadUrl}` : ''}`);
           

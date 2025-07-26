@@ -1,4 +1,4 @@
-const messageStorage = require('../../lib/messageStorage');
+const messageStorage = require('../../lib/memoryStorage');
 
 module.exports = async (req, res) => {
   // Handle preflight OPTIONS request
