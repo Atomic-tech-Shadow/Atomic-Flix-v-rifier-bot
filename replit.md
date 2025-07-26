@@ -90,6 +90,8 @@ Language: French (user communicates in French)
 - Fixed Telegram bot webhook to handle new /message command format
 - Implemented shared message storage with lib/messageStorage.js
 - System tested and fully operational with atomic_flix_mobile_v1 app ID
+- Fixed webhook to call send-app-message function directly instead of HTTP requests
+- Command /message successfully tested on production with real message delivery
 
 ## System Architecture
 
