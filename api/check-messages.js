@@ -15,12 +15,27 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
   
   try {
-    const { appId } = req.params;
+    // Pour Vercel, récupérer appId depuis l'URL ou les query params
+    let appId;
+    
+    // Essayer de récupérer depuis l'URL path (ex: /api/check-messages/atomic_flix_mobile_v1)
+    if (req.url) {
+      const urlParts = req.url.split('/');
+      const checkMessagesIndex = urlParts.findIndex(part => part === 'check-messages');
+      if (checkMessagesIndex !== -1 && urlParts[checkMessagesIndex + 1]) {
+        appId = urlParts[checkMessagesIndex + 1].split('?')[0]; // Enlever les query params
+      }
+    }
+    
+    // Sinon essayer les query params
+    if (!appId && req.query && req.query.appId) {
+      appId = req.query.appId;
+    }
     
     if (!appId) {
       return res.status(400).json({
         success: false,
-        error: 'appId parameter is required'
+        error: 'appId parameter is required. Use /api/check-messages/YOUR_APP_ID or ?appId=YOUR_APP_ID'
       });
     }
     

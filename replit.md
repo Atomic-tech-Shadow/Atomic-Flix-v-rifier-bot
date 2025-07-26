@@ -94,6 +94,7 @@ Language: French (user communicates in French)
 - Command /message successfully tested on production with real message delivery
 - Migrated message storage from memory to file-based system (/tmp/messages) for serverless persistence
 - Fixed endpoint testing - messages now properly persist between API calls on Vercel
+- Fixed check-messages endpoint for Vercel compatibility (URL parameter parsing)
 
 ## System Architecture
 
