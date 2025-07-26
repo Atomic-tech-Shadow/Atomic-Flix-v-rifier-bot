@@ -87,6 +87,9 @@ Language: French (user communicates in French)
 - Mobile app integration via direct message polling
 - Removed push notification dependencies for simpler architecture
 - Admin-only access maintained with permission checks
+- Fixed Telegram bot webhook to handle new /message command format
+- Implemented shared message storage with lib/messageStorage.js
+- System tested and fully operational with atomic_flix_mobile_v1 app ID
 
 ## System Architecture
 

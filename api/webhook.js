@@ -102,50 +102,48 @@ module.exports = async (req, res) => {
             }
           }
         );
-      } else if (text.match(/^\/message\s+"([^"]+)"\s+"([^"]+)"(\s+"([^"]+)")?/)) {
-        // Nouvelle commande /message "Titre" "Message" [URL]
-        const matches = text.match(/^\/message\s+"([^"]+)"\s+"([^"]+)"(\s+"([^"]+)")?/);
-        const title = matches[1];
-        const message = matches[2];
-        const downloadUrl = matches[4] || null;
+      } else if (text.match(/^\/message\s+(.+)/)) {
+        // Commande pour envoyer message à toutes les apps
+        const input = text.replace('/message ', '');
+        const parts = input.split('"').filter(part => part.trim());
         
-        console.log(`Command /message from user ${userId}: title="${title}", message="${message}", url="${downloadUrl}"`);
+        // Vérifier si c'est l'admin (remplace par ton ID Telegram)
+        const ADMIN_USER_ID = 6968736907; // ID admin principal
+        if (userId !== ADMIN_USER_ID) {
+          await bot.sendMessage(chatId, '❌ Accès refusé');
+          return res.status(200).json({ success: true });
+        }
         
-        // Appel de la fonction de gestion de la commande message
-        const updateCommandHandler = require('./update-command');
-        const updateRequest = {
-          method: 'POST',
-          body: {
-            chatId: chatId,
-            userId: userId,
-            title: title,
-            message: message,
-            downloadUrl: downloadUrl
-          }
-        };
+        if (parts.length < 2) {
+          await bot.sendMessage(chatId, '❌ Format: /message "Titre" "Message" [URL]');
+          return res.status(200).json({ success: true });
+        }
         
-        const updateResponse = {
-          setHeader: () => {},
-          status: (code) => ({
-            json: (data) => {
-              console.log('Message command response:', data);
-              return data;
+        const title = parts[0].trim();
+        const message = parts[1].trim();
+        const downloadUrl = parts[2] ? parts[2].trim() : null;
+        
+        try {
+          // Envoyer à l'API serveur (utiliser axios)
+          const axios = require('axios');
+          const API_URL = process.env.API_URL || 'http://localhost:5000';
+          
+          await axios.post(`${API_URL}/api/send-app-message`, {
+            appId: 'atomic_flix_mobile_v1',
+            message: {
+              title,
+              message,
+              downloadUrl,
+              buttonText: downloadUrl ? '📥 Télécharger' : 'OK'
             }
-          })
-        };
-        
-        await updateCommandHandler(updateRequest, updateResponse);
-      } else if (text.startsWith('/update')) {
-        await bot.sendMessage(chatId, 
-          `🤖 *ATOMIC FLIX Bot*\n\n` +
-          `Commandes disponibles:\n\n` +
-          `/message "Titre" "Message" [URL]\n` +
-          `   Envoie un message à toutes les apps\n\n` +
-          `Exemple:\n` +
-          `/message "Nouvelle version" "Version 2.9.1 disponible !" "https://apkpure.com/atomic-flix"\n\n` +
-          `/help - Affiche cette aide`,
-          { parse_mode: 'Markdown' }
-        );
+          });
+          
+          await bot.sendMessage(chatId, `✅ Message envoyé à toutes les apps ATOMIC FLIX\n\n📝 Titre: ${title}\n💬 Message: ${message}${downloadUrl ? `\n🔗 Lien: ${downloadUrl}` : ''}`);
+          
+        } catch (error) {
+          console.error('Erreur envoi message:', error);
+          await bot.sendMessage(chatId, '❌ Erreur lors de l\'envoi du message');
+        }
       } else if (text.startsWith('/verify')) {
         // Check subscription status
         const { verifySubscription } = require('../lib/telegramBot');
@@ -194,25 +192,14 @@ module.exports = async (req, res) => {
         }
       } else if (text.startsWith('/help')) {
         await bot.sendMessage(chatId, 
-          `❓ Aide ATOMIC FLIX\n\n` +
-          `Commandes disponibles :\n` +
-          `• /start - Démarrer le bot\n` +
-          `• /verify - Vérifier votre abonnement\n` +
-
-          `• /help - Afficher cette aide\n\n` +
-          `Pour accéder aux animes, vous devez être abonné au canal @Atomic_flix_officiel.`,
-          {
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: '📱 Rejoindre le canal',
-                    url: 'https://t.me/Atomic_flix_officiel'
-                  }
-                ]
-              ]
-            }
-          }
+          `🤖 *ATOMIC FLIX Bot*\n\n` +
+          `Commandes disponibles:\n\n` +
+          `/message "Titre" "Message" [URL]\n` +
+          `   Envoie un message à toutes les apps\n\n` +
+          `Exemple:\n` +
+          `/message "Nouvelle version" "Version 2.9.1 disponible !" https://apkpure.com/atomic-flix\n\n` +
+          `/help - Affiche cette aide`,
+          { parse_mode: 'Markdown' }
         );
 
       } else if (text.startsWith('/movies')) {
