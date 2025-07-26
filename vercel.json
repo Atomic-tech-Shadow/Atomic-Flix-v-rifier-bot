@@ -20,27 +20,10 @@
     "api/bot-info.js": {
       "maxDuration": 10
     },
-
-
     "api/send-app-message.js": {
       "maxDuration": 10
     },
-    "api/check-messages.js": {
-      "maxDuration": 10
-    },
     "api/check-messages/[appId].js": {
-      "maxDuration": 10
-    },
-    "api/security-middleware.js": {
-      "maxDuration": 10
-    },
-    "api/security-webhook.js": {
-      "maxDuration": 10
-    },
-    "api/expo-push.js": {
-      "maxDuration": 15
-    },
-    "api/register-push-token.js": {
       "maxDuration": 10
     }
   }

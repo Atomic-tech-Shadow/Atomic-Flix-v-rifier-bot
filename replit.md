@@ -96,6 +96,7 @@ Language: French (user communicates in French)
 - Fixed endpoint testing - messages now properly persist between API calls on Vercel
 - Fixed check-messages endpoint for Vercel compatibility (URL parameter parsing)
 - Added dynamic route api/check-messages/[appId].js for better Vercel URL routing support
+- Cleaned up Vercel functions to stay under 12 function limit (removed security and expo-push endpoints)
 
 ## System Architecture
 
