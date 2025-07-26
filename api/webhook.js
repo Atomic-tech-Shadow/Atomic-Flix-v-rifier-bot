@@ -111,30 +111,17 @@ module.exports = async (req, res) => {
         const downloadUrl = parts[2] ? parts[2].trim() : null;
         
         try {
-          // Appeler directement la fonction send-app-message au lieu de faire un appel HTTP
-          const sendAppMessage = require('./send-app-message');
+          // Utiliser directement le système de stockage de messages
+          const messageStorage = require('../lib/messageStorage');
           
-          const mockReq = {
-            method: 'POST',
-            body: {
-              appId: 'atomic_flix_mobile_v1',
-              message: {
-                title,
-                message,
-                downloadUrl,
-                buttonText: downloadUrl ? '📥 Télécharger' : 'OK'
-              }
-            }
+          const messageData = {
+            title,
+            message,
+            downloadUrl,
+            buttonText: downloadUrl ? '📥 Télécharger' : 'OK'
           };
           
-          const mockRes = {
-            setHeader: () => {},
-            status: (code) => ({
-              json: (data) => data
-            })
-          };
-          
-          await sendAppMessage(mockReq, mockRes);
+          const savedMessage = messageStorage.addMessage('atomic_flix_mobile_v1', messageData);
           
           await bot.sendMessage(chatId, `✅ Message envoyé à toutes les apps ATOMIC FLIX\n\n📝 Titre: ${title}\n💬 Message: ${message}${downloadUrl ? `\n🔗 Lien: ${downloadUrl}` : ''}`);
           
