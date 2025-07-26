@@ -19,7 +19,7 @@ const setCommandsRoute = require('./api/set-commands');
 // const expoPushRoute = require('./api/expo-push'); // Removed
 // const registerPushTokenRoute = require('./api/register-push-token'); // Removed
 const sendAppMessageRoute = require('./api/send-app-message');
-// const checkMessagesRoute = require('./api/check-messages'); // Removed - using dynamic route
+const checkMessagesRoute = require('./api/check-messages/[appId]');
 
 // API routes
 app.get('/api/health', healthRoute);
@@ -32,7 +32,7 @@ app.post('/api/set-commands', setCommandsRoute);
 // app.post('/api/expo-push', expoPushRoute); // Removed
 // app.post('/api/register-push-token', registerPushTokenRoute); // Removed
 app.post('/api/send-app-message', sendAppMessageRoute);
-// app.get('/api/check-messages/:appId', checkMessagesRoute); // Using dynamic route instead
+app.get('/api/check-messages/:appId', checkMessagesRoute);
 
 // Root route
 app.get('/', (req, res) => {

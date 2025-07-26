@@ -15,8 +15,8 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
   
   try {
-    // Vercel dynamic routes - appId depuis les query params
-    const { appId } = req.query;
+    // Express.js - appId depuis les paramètres d'URL
+    const { appId } = req.params;
     
     if (!appId) {
       return res.status(400).json({
